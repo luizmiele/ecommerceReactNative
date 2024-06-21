@@ -23,6 +23,7 @@ const StackComponent = () => {
       <Screen
         name="Login"
         component={Login}
+        options={{headerShown: false}}
       />
       <Screen
         name="Dashboard"
