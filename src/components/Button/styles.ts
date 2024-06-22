@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderLeftWidth: 1,
         borderBottomWidth: 3,
-        width: "30%",
+        width: 70,
+        backgroundColor: "#C3C7CB",
     }
 });
