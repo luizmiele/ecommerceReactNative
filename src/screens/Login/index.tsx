@@ -3,12 +3,22 @@ import { LoginProps, StackTypes } from "../../routes/stack";
 import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { useState } from "react";
+import Button from "../../components/Button";
+import Input from "../../components/Input";
 
 export default function Login() {
     const navigation = useNavigation<StackTypes>();
 
     const [username, setUsername] = useState<string>('user');
     const [password, setPassword] = useState<string>('');
+
+    function handlesignIn() {
+
+    };
+
+    function handleCancel() {
+
+    };
 
     return (
         <View style={styles.container}>
@@ -26,25 +36,19 @@ export default function Login() {
                 </View>
                 <View style={styles.formContainer}>
                     <Text style={styles.label}>Select user name:</Text>
-                    <TextInput
-                        style={styles.input}
+                    <Input
                         value={username}
-                        onChangeText={(text) => setUsername(text)}
+                        onChangeText={(text: string) => setUsername(text)}
                     />
                     <Text style={styles.label}>Password:</Text>
-                    <TextInput
-                        style={styles.input}
+                    <Input
                         value={password}
-                        onChangeText={(text) => setPassword(text)}
+                        onChangeText={(text: string) => setPassword(text)}
                         secureTextEntry={true}
                     />
                     <View style={styles.buttonContainer}>
-                        <TouchableOpacity style={styles.btn}>
-                            <Text>0K</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.btn}>
-                            <Text>Cancel</Text>
-                        </TouchableOpacity>
+                        <Button style={styles.btn} title="0K" onPress={handlesignIn}/>
+                        <Button style={styles.btn} title="Cancel" onPress={handleCancel}/>
                     </View>
                 </View>
             </View>

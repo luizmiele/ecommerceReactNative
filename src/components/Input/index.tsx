@@ -1,10 +1,12 @@
-import { View, Text } from "react-native";
+import { TextInput } from "react-native";
 import { styles } from "./styles";
+import { InputProps } from "../../types";
 
-export default function Input() {
-    return(
-        <View style={styles.inputContainer}>
-            <Text>Componente Input</Text>
-        </View>
+export default function Input({style, ...props}: InputProps) {
+    return (
+        <TextInput
+            style={[styles.input, style]}
+            {...props}
+        />
     );
 }

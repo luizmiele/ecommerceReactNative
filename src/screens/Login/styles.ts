@@ -54,15 +54,6 @@ export const styles = StyleSheet.create({
         fontSize: 12,
         marginBottom: 5,
     },
-    input: {
-        width: "95%",
-        height: 20,
-        paddingHorizontal: 8,
-        borderWidth: 2,
-        backgroundColor: '#FFF',
-        borderRightColor: "#FFF",
-        borderBottomColor: "#FFF",
-    },
     buttonContainer: {
         flexDirection: "row",
         justifyContent: "flex-end",
@@ -70,13 +61,6 @@ export const styles = StyleSheet.create({
         paddingHorizontal: "4%"
     },
     btn: {
-        alignItems: "center",
-        justifyContent: "center",
-        borderRightWidth: 2,
-        borderTopWidth: 1,
-        borderLeftWidth: 1,
-        borderBottomWidth: 3,
-        width: "30%",
         marginHorizontal: 3,
-    }
+    },
 });
