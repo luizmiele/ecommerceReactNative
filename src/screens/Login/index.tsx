@@ -13,7 +13,7 @@ export default function Login() {
     const [password, setPassword] = useState<string>('');
 
     function handlesignIn() {
-
+        navigation.navigate("Workspace");
     };
 
     function handleCancel() {

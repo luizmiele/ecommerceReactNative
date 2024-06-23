@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { DimensionValue, StyleProp, TextInputProps, TouchableOpacityProps, ViewStyle } from "react-native";
+import { DimensionValue, StyleProp, TextInputProps, TextStyle, TouchableOpacityProps, ViewStyle } from "react-native";
 
 export interface ButtonTitleProps extends TouchableOpacityProps {
     title: string;
@@ -15,4 +15,14 @@ export type propsJanela = {
     children: ReactNode;
     height: DimensionValue;
     width: DimensionValue;
+}
+
+export interface IconProps extends TouchableOpacityProps {
+    title: string;
+    style?: ViewStyle | ViewStyle[];
+    source?: string;
+    width: number;
+    height: number;
+    textStyle?: StyleProp<TextStyle>;
+    onPress: () => void;
 }
