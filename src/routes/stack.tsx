@@ -7,9 +7,11 @@ import CriarProdutos from "../screens/CriarProdutos";
 import VisualizarProdutos from "../screens/VisualizarProdutos";
 import AtualizarProdutos from "../screens/AtualizarProdutos";
 import SobreNos from "../screens/SobreNos";
+import { SplashScreenWrapper } from "../screens/Splash/SplashScreenWrapper";
 
 
 type StackNavigation = {
+  Splash: undefined;
   Login: undefined;
   Workspace: undefined;
   Lixeira: undefined;
@@ -20,6 +22,7 @@ type StackNavigation = {
 };
 
 export type StackTypes = NativeStackNavigationProp<StackNavigation>;
+export type SplashProps = NativeStackScreenProps<StackNavigation, "Splash">;
 export type LoginProps = NativeStackScreenProps<StackNavigation, "Login">;
 export type WorkspaceProps = NativeStackScreenProps<StackNavigation, "Workspace">;
 export type LixeiraProps = NativeStackScreenProps<StackNavigation, "Lixeira">;
@@ -33,6 +36,11 @@ const { Navigator, Screen } = createNativeStackNavigator<StackNavigation>();
 const StackComponent = () => {
   return (
     <Navigator>
+      <Screen
+        name="Splash"
+        component={SplashScreenWrapper}
+        options={{ headerShown: false }}
+      />
       <Screen
         name="Login"
         component={Login}
