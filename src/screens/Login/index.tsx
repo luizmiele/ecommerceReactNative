@@ -6,6 +6,7 @@ import { useState } from "react";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 
+
 export default function Login() {
     const navigation = useNavigation<StackTypes>();
     const [openCard, setOpenCard] = useState<boolean>(false);
