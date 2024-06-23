@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         top: "10%",
-    }, 
+    },
     title: {
         color: "#FFF",
         fontWeight: "bold",
