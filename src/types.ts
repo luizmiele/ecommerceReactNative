@@ -3,7 +3,7 @@ import { DimensionValue, ImageSourcePropType, StyleProp, TextInputProps, TextSty
 
 export interface ButtonTitleProps extends TouchableOpacityProps {
     title: string;
-    onPress: () => void;
+    onPress?: () => void;
 };
 
 export interface InputProps extends TextInputProps {
@@ -11,10 +11,18 @@ export interface InputProps extends TextInputProps {
 }
 
 export type propsJanela = {
-    header: string | number;
-    children: ReactNode;
-    height: DimensionValue;
-    width: DimensionValue;
+    header?: string | number | null;
+    onPress?: () => void,
+    children: ReactNode | undefined | null;
+    height?: DimensionValue | null;
+    width?: DimensionValue | null;
+}
+
+export type messageProps={
+    onPress?:() => void;
+    titulo?:string | number | null
+    error?:boolean | null;
+    content: string | number | null;
 }
 
 export interface IconProps extends TouchableOpacityProps {
@@ -24,7 +32,7 @@ export interface IconProps extends TouchableOpacityProps {
     width: number;
     height: number;
     textStyle?: StyleProp<TextStyle>;
-    onPress: () => void;
+    onPress?: () => void;
 }
 
 export interface SearchBar{
