@@ -34,7 +34,7 @@ export const styles = StyleSheet.create ({
             borderWidth: 2,
             borderLeftColor: "#FFF",
             borderTopColor: "#FFF",
-            zIndex: 0
+            zIndex: 0,
         },
         cards: {
             marginTop : 10,
