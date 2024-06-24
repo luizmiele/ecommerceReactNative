@@ -22,10 +22,12 @@ imgContainer: {
     borderLeftColor: "#000",
     borderRightColor: "#FFF",
     borderBottomColor: "#FFF",
+    backgroundColor:'#00fc',
     alignItems: "center",
     justifyContent: "center",
 },
 imagemCentro: {
+    resizeMode:'contain',
     height: 66,
     width: 136, 
 },

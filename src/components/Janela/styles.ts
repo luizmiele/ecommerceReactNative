@@ -21,8 +21,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 2,
     },
     container: {
-        //justifyContent: "center",
-        //top: "10%",
+        
     },
     title: {
         color: "#FFF",

@@ -4,28 +4,28 @@ import { useState } from "react";
 import { itemFoundProps } from "../../types";
 import { Modal } from "../../components/Modal";
 
-export default function ItemFound({ onPress, titulo, imagem, ...rest }: itemFoundProps) {
-  // const [isModalVisible, setModalVisible] = useState(false);
+export default function ItemFound({...rest }: itemFoundProps) {
+  const [isModalVisible, setModalVisible] = useState(false);
 
-  // const toggleModal = () => {
-  //   setModalVisible(!isModalVisible)
-  // }
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible)
+  }
 
   return (
-    <TouchableOpacity onPress={onPress} >
+    <TouchableOpacity onPress={toggleModal}>
       <View style={styles.geral}>
         <View style={styles.imgContainer}>
           <Image
             style={styles.imagemCentro}
-            source={{uri:imagem}}
+            source={{ uri: rest.imagem }}
           />
         </View>
         <View style={styles.titulo}>
-          <Text>{titulo}</Text>
+          <Text>{rest.titulo}</Text>
         </View>
       </View>
-      {/* <Modal isModalVisible={isModalVisible} onClose={toggleModal} /> */}
+      <Modal description={rest.description} imagem={rest.imagem} titulo={rest.titulo} price={rest.price} type={rest.type} isModalVisible={isModalVisible} onClose={toggleModal} />
     </TouchableOpacity>
-    
+
   );
 }
