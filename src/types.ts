@@ -40,3 +40,15 @@ export interface SearchBar{
     onPressLupa?: () => void;
     [key: string]: any;
 }
+
+
+export type Item = {
+    imagem: string,
+    nome: string,
+    descricao: string,
+    tipo: string,
+    preco: number,
+    def_magica: number,
+    def_fisica: number,
+    durabilidade: number
+}

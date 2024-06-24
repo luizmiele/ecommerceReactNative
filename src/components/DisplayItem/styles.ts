@@ -14,7 +14,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center'
     },
     image: {
-        flex: 1
+        flex: 1,
+        width: 100
     }
 
 });

@@ -2,16 +2,31 @@ import { Text, TouchableOpacity, View, Image, TextInput } from "react-native";
 import { styles } from './styles';
 import Janela from "../../components/Janela";
 import DisplayItem from "../../components/DisplayItem";
-import Input from "../../components/Input";
 import Checkbox from "../../components/Checkbox";
 import Button from "../../components/Button";
+import { Item } from "../../types";
+import { useState } from "react";
 
 export default function CriarProdutos() {
+
+    // const [useItem, setItem] = useState<Item>({
+    //     imagem: '',
+    //     nome: '',
+    //     descricao: '', 
+    //     tipo: '',
+    //     preco: 0,
+    //     def_magica: 0, 
+    //     def_fisica: 0, 
+    //     durabilidade: 0
+    // });
+
+    let novoItem: Item;
+
 
     const imageItem = { uri: 'https://i.seadn.io/gae/hDhaRCy22Cf9QqzReF9FYSyD3oWhakERG58wWllHU8bxish-nu8skJnEztU6Cm3dyeR4PE02clpeDslLZTF213i7rHNsgqT4BtBIsg?auto=format&dpr=1&w=1000' }
 
     function marcaCheck() {
-
+        
     }
 
     return (
@@ -19,15 +34,20 @@ export default function CriarProdutos() {
             <View style={styles.janela}>
                 <Janela header="Criar Produtos" height={"90%"} width={"90%"}>
                     <View style={styles.todos}>
-                        
+
                         <DisplayItem itemImage={imageItem} />
-                        
-                        <View style={styles.main}>
+
+                        <View>
                             <Text>Nome: </Text>
-                            <Input />
+                            <TextInput
+                                style={styles.inputName}
+                                onChange={e => novoItem.nome = String(e)} />
                             <Text>Descrição: </Text>
                             <TextInput
-                                style={styles.inputDescription} />
+                                style={styles.inputDescription}
+                                multiline={true}
+                                numberOfLines={4} 
+                                onChange={e => novoItem.descricao = String(e)} />
                         </View>
                         <View style={styles.tipo}>
 
@@ -42,19 +62,40 @@ export default function CriarProdutos() {
                                 <TextInput
                                     placeholder="R$: "
                                     keyboardType="numeric"
-                                    style={styles.input} />
+                                    style={styles.input} 
+                                    onChange={e => novoItem.preco = Number(e)} />
                             </View>
                         </View>
 
                         <View style={styles.outerInfoBox}>
                             <View style={styles.infoBox}>
-
+                                <View style={styles.inputBox}>
+                                    <Text>Defesa Mágica: </Text>
+                                    <TextInput
+                                        keyboardType="numeric"
+                                        style={styles.input} 
+                                        onChange={e => novoItem.def_magica = Number(e)} />
+                                </View>
+                                <View style={styles.inputBox}>
+                                    <Text>Defesa Física: </Text>
+                                    <TextInput
+                                        keyboardType="numeric"
+                                        style={styles.input}
+                                        onChange={e => novoItem.def_fisica = Number(e)} />
+                                </View>
+                                <View style={styles.inputBox}>
+                                    <Text>Durabilidade: </Text>
+                                    <TextInput
+                                        keyboardType="numeric"
+                                        style={styles.input}
+                                        onChange={e => novoItem.durabilidade = Number(e)} />
+                                </View>
                             </View>
                         </View>
 
                         <View style={styles.botoes}>
-                            <Button title='Cancelar' style={styles.botao} />
-                            <Button title='Salvar' style={styles.botao} />
+                            <Button title='Cancelar' />
+                            <Button title='Salvar' />
                         </View>
                     </View>
                 </Janela>

@@ -10,21 +10,18 @@ export const styles = StyleSheet.create ({
     janela: {
         flex: 1, 
         justifyContent: 'center',
-        padding: 20,
+        padding: 30,
     },
     todos: {
         flex: 1,
         width: 350,
         padding: 10, 
-        gap: 10
-    },
-    main: {
-        marginBottom: 10
+        gap: 5
     },
     tipo: {
-        flex: 0.33, 
+        flex: 1, 
         flexDirection: 'row',
-        gap: 20
+        alignItems: 'center'
     },
     inputView: {
         flex: 1,
@@ -32,8 +29,17 @@ export const styles = StyleSheet.create ({
         justifyContent: 'center',
         padding: 40
     },
+    inputName: {
+        width: "98%",
+        height: 30,
+        paddingHorizontal: 8,
+        borderWidth: 2,
+        backgroundColor: '#FFF',
+        borderRightColor: "#FFF",
+        borderBottomColor: "#FFF",
+    },
     input: {
-        width: "90%",
+        width: "100%",
         height: 20,
         paddingHorizontal: 8,
         borderWidth: 2,
@@ -42,7 +48,7 @@ export const styles = StyleSheet.create ({
         borderBottomColor: "#FFF",
     },
     inputDescription: {
-        width: "95%",
+        width: "98%",
         height: 90,
         paddingHorizontal: 8,
         borderWidth: 2,
@@ -53,23 +59,26 @@ export const styles = StyleSheet.create ({
     outerInfoBox: {
         flex: 1,
         backgroundColor: "#f0f0f0",
-        padding: 1,
         marginHorizontal: 5,
         marginBottom: 5,
     },
     infoBox: {
         flex:1,
-        zIndex: 1,
-        paddingTop: 20,
-        padding: 10,
-        gap: 10,
         backgroundColor: "#C3C7CB",
         borderColor: "#606060",
+        padding: 10,
         borderWidth: 2,
         shadowColor: '#fff',
         shadowOffset: { width: -2, height: -2 },
         shadowOpacity: 1,
         shadowRadius: 2,
+    },
+    inputBox: {
+        flex: 1,
+        width: '50%',
+        flexDirection: 'row', 
+        justifyContent: 'space-between',
+        gap: 30
     },
     botoes: {
         flex: 0.2,
