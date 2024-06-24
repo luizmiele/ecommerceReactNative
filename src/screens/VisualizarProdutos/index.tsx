@@ -1,18 +1,42 @@
-import { Text, View, Image, Alert, TouchableOpacity } from "react-native";
+import { Text, View, Image, Alert, TouchableOpacity, FlatList } from "react-native";
 import Janela from "../../components/Janela";
 import { styles } from "./styles";
 import Button from "../../components/Button/index";
 import ItemFound from "../../components/ItemFound/index";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Modal } from "../../components/Modal";
+import { getItens } from "../../services/Api/api";
 
 export default function VisualizarProdutos() {
 
+  type itens={
+    id:number|string;
+    name:string;
+    description:string
+    img:string;
+    price:number
+    type:string
+  }
+  
   const [isModalVisible, setModalVisible] = useState(false);
+  const [lista, setLista] = useState<itens>([])
+
+  async function getAllItens() {
+    try {
+      const result = await getItens();
+      setLista(result.data)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
   }
+
+  useEffect(() => {
+    getAllItens();
+  },[])
 
   return (
     <View style={styles.container}>
@@ -24,16 +48,15 @@ export default function VisualizarProdutos() {
             </View>
           </View>
           <View style={styles.geral}>
-            <View style={styles.cards}>
-              <ItemFound onPress={toggleModal}/>
-              <ItemFound onPress={toggleModal}/>
-              <ItemFound onPress={toggleModal}/>
-              <ItemFound onPress={toggleModal}/>
-            </View>
+            <FlatList
+            data={lista}
+            renderItem={({item}) => <ItemFound onPress={toggleModal} titulo={item.name} imagem={item.img}/>}
+            keyExtractor={item => item.id}        
+            />
           </View>
         </Janela>
-      </View>      
-      <Modal isModalVisible={isModalVisible} onClose={toggleModal}/>
+      </View>
+      <Modal isModalVisible={isModalVisible} onClose={toggleModal} />
     </View>
   );
 }
