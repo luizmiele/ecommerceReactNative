@@ -3,8 +3,17 @@ import Janela from "../../components/Janela";
 import { styles } from "./styles";
 import Button from "../../components/Button/index";
 import ItemFound from "../../components/ItemFound/index";
+import { useState } from "react";
+import { Modal } from "../../components/Modal";
 
 export default function VisualizarProdutos() {
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.janela}>
@@ -16,14 +25,15 @@ export default function VisualizarProdutos() {
           </View>
           <View style={styles.geral}>
             <View style={styles.cards}>
-              <ItemFound />
-              <ItemFound />
-              <ItemFound />
-              <ItemFound />
+              <ItemFound onPress={toggleModal}/>
+              <ItemFound onPress={toggleModal}/>
+              <ItemFound onPress={toggleModal}/>
+              <ItemFound onPress={toggleModal}/>
             </View>
           </View>
         </Janela>
-      </View>
+      </View>      
+      <Modal isModalVisible={isModalVisible} onClose={toggleModal}/>
     </View>
   );
 }
