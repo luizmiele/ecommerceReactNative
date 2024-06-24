@@ -10,6 +10,23 @@ export interface InputProps extends TextInputProps {
     style?: StyleProp<ViewStyle>;
 }
 
+export type itemFoundProps={
+    onPress?:()=>void;
+    titulo: string;
+    imagem:string;
+    description:string;
+    price:number,
+    type:string,
+}
+export type itens={
+    id:number|string;
+    name:string;
+    description:string
+    img:string;
+    price:number
+    type:string
+}
+
 export type propsJanela = {
     header?: string | number | null;
     onPress?: () => void,
@@ -52,4 +69,9 @@ export type Item = {
     def_magica: number,
     def_fisica: number,
     durabilidade: number
+}
+
+
+export interface FooterProps extends TouchableOpacityProps {
+    onPress?: () => void;
 }

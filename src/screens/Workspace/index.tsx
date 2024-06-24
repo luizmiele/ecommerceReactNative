@@ -1,11 +1,10 @@
-import { TouchableOpacity, View, Image, Text } from "react-native";
+import {  View } from "react-native";
 import { styles } from "./styles";
 import Icone from "../../components/Icone";
-import { useNavigation } from "@react-navigation/native";
-import { StackTypes } from "../../routes/stack";
+import Footer from "../../components/Footer";
 
-export default function Workspace() {
-    const navigation = useNavigation<StackTypes>();
+export default function Workspace({ navigation }: any) {
+    //const navigation = useNavigation<StackTypes>();
 
     function handleNavigateToLixeira() {
         navigation.navigate("Lixeira");
@@ -35,9 +34,9 @@ export default function Workspace() {
         navigation.navigate("Calculadora")
     }
 
-    // function toggleDrawer() {
-    //     navigation.toggleDrawer();
-    // }
+    function toggleDrawer() {
+        navigation.toggleDrawer();
+    }
 
     return (
         <View style={styles.container}>
@@ -106,16 +105,7 @@ export default function Workspace() {
                     onPress={handleNavigateToCalculadora}
                 />
             </View>
-            <View style={styles.footerContainer}>
-                <View style={styles.footerContent}>
-                    <TouchableOpacity style={styles.btnStart}>
-                        <Image
-                            source={require("../../../assets/icons/logo-98-bar 1.png")}
-                        />
-                        <Text style={styles.btnText}>Start</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            </View>
-            );
+            <Footer onPress={toggleDrawer}/>
+        </View>
+    );
 }

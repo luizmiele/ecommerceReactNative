@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     imgContainer: {
         top: 10,
         alignSelf: "center",
-        height: 150,
+        height: 220,
         width: "90%",
         borderWidth: 2,
         borderTopColor: "#000",
@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
     },
     imgCentro: {
+        resizeMode:'contain',
         height: "99%",
         width: "99%", 
     },

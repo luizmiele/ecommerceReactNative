@@ -10,54 +10,35 @@ import Checkbox from "../Checkbox";
 
 interface ModalProps {
     isModalVisible: boolean;
+    titulo: string;
+    imagem: string;
+    description: string;
+    price: number,
+    type: string,
     onClose: () => void;
 }
 
-export const Modal = ({
-    isModalVisible,
-    onClose
-    }: ModalProps ) => {
+export const Modal = ({ ...rest }: ModalProps) => {
 
     const navigation = useNavigation<StackTypes>();
-
-    const [nameItem, setNameItem] = useState<string>('item');
-    const [descriptionItem, setDescriptionItem] = useState<string>('descriptionItem');
-    const [priceItem, setPriceItem] = useState<number>(0);
-
-    const [isArmorChecked, setIsArmorChecked] = useState(false);
-    const [isMaterialChecked, setIsMaterialChecked] = useState(false);
 
     function handlesignIn() {
         navigation.navigate("AtualizarProdutos");
     };
 
-    const handleArmorCheck = () => {
-        setIsArmorChecked(!isArmorChecked);
-        if (!isArmorChecked) {
-            setIsMaterialChecked(false);
-        }
-    };
-
-    const handleMaterialCheck = () => {
-        setIsMaterialChecked(!isMaterialChecked);
-        if (!isMaterialChecked) {
-            setIsArmorChecked(false);
-        }
-    };
-    
-
     return (
         <ModalContainer
             animationType="fade"
             transparent={true}
-            visible={isModalVisible}
-            onRequestClose={onClose}>
+            visible={rest.isModalVisible}
+            onRequestClose={rest.onClose}>
             <View style={styles.modalContainer}>
                 <View style={styles.modalContent}>
                     <View style={styles.imgContainer}>
                         <Image
-                            style={styles.imgCentro}
-                            source={require("../../../assets/icons/guguteste.png")}
+                            style={[styles.imgCentro]}
+                            source={{ uri: rest.imagem }
+                        }
                         />
                     </View>
                     <View style={styles.infoContainer}>
@@ -66,27 +47,26 @@ export const Modal = ({
                             <View style={styles.infoBox}>
                                 <View style={styles.infoContent}>
                                     <Text style={styles.label}>Nome:</Text>
-                                    <Input value={nameItem} />
+                                    <Text style={{ fontStyle: 'italic' }}>{rest.titulo}</Text>
                                 </View>
                                 <View style={styles.infoContent}>
                                     <Text style={styles.label}>Descrição:</Text>
-                                    <Input value={descriptionItem} style={styles.descriptionInput}/>
+                                    <Text style={{ fontStyle: 'italic' }}>{rest.description}</Text>
                                 </View>
                                 <View style={styles.priceInfoContent}>
-                                    <Text style={styles.label}>Preço:</Text>                                    
-                                    <Input value={String(priceItem)} style={styles.priceInput}/>
+                                    <Text style={styles.label}>Preço:</Text>
+                                    <Text style={{ fontStyle: 'italic' }}>{rest.price}</Text>
                                 </View>
                                 <View style={styles.typeInfoContent}>
                                     <Text style={styles.label}>Tipo:</Text>
                                     <View style={styles.checkboxContainer}>
-                                        <Checkbox label={"Armadura"} checked={isArmorChecked} onChange={handleArmorCheck}/>
-                                        <Checkbox label={"Material"} checked={isMaterialChecked} onChange={handleMaterialCheck}/>                                        
+                                        <Text style={{ fontStyle: 'italic' }}>{rest.type}</Text>
                                     </View>
                                 </View>
                             </View>
                         </View>
                         <View style={styles.buttonsContainer}>
-                            <Button title="Cancelar" onPress={onClose} />
+                            <Button title="Cancelar" onPress={rest.onClose} />
                             <Button title="Editar" onPress={handlesignIn} />
                         </View>
                     </View>
