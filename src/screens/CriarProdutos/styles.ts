@@ -62,6 +62,13 @@ export const styles = StyleSheet.create ({
         marginHorizontal: 5,
         marginBottom: 5,
     },
+    outerInfoBoxDisabled: {
+        flex: 1,
+        backgroundColor: "#f0f0f0",
+        marginHorizontal: 5,
+        marginBottom: 5,
+        opacity: 0.5
+    },
     infoBox: {
         flex:1,
         backgroundColor: "#C3C7CB",

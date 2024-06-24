@@ -9,25 +9,52 @@ import { useState } from "react";
 
 export default function CriarProdutos() {
 
-    // const [useItem, setItem] = useState<Item>({
-    //     imagem: '',
-    //     nome: '',
-    //     descricao: '', 
-    //     tipo: '',
-    //     preco: 0,
-    //     def_magica: 0, 
-    //     def_fisica: 0, 
-    //     durabilidade: 0
-    // });
 
-    let novoItem: Item;
+    const [isArmorChecked, setIsArmorChecked] = useState<boolean>(false);
+    const [isMaterialChecked, setIsMaterialChecked] = useState<boolean>(false);
 
+    const [novoItem, setItem] = useState<Item>({
+        imagem: '',
+        nome: '',
+        descricao: '', 
+        tipo: '',
+        preco: 0,
+        def_magica: 0, 
+        def_fisica: 0, 
+        durabilidade: 0
+    });
 
-    const imageItem = { uri: 'https://i.seadn.io/gae/hDhaRCy22Cf9QqzReF9FYSyD3oWhakERG58wWllHU8bxish-nu8skJnEztU6Cm3dyeR4PE02clpeDslLZTF213i7rHNsgqT4BtBIsg?auto=format&dpr=1&w=1000' }
+    
+    const handleArmorCheck = () => {
+        setIsArmorChecked(!isArmorChecked);
+        if (!isArmorChecked) {
+            setIsMaterialChecked(false);
+            setItem({...novoItem, tipo: 'armadura'});
+        }
+    };
 
-    function marcaCheck() {
-        
+    const handleMaterialCheck = () => {
+        setIsMaterialChecked(!isMaterialChecked);
+        if (!isMaterialChecked) {
+            setIsArmorChecked(false);
+            setItem({...novoItem, tipo: 'material'});
+        }
+    };
+
+    const cancelaItem = () => {
+        setItem({
+            imagem: '',
+            nome: '',
+            descricao: '', 
+            tipo: '',
+            preco: 0,
+            def_magica: 0, 
+            def_fisica: 0, 
+            durabilidade: 0
+        });
     }
+
+    console.log(novoItem)
 
     return (
         <View style={styles.container}>
@@ -35,26 +62,29 @@ export default function CriarProdutos() {
                 <Janela header="Criar Produtos" height={"90%"} width={"90%"}>
                     <View style={styles.todos}>
 
-                        <DisplayItem itemImage={imageItem} />
+                        <DisplayItem itemImage={novoItem.imagem} />
 
                         <View>
                             <Text>Nome: </Text>
                             <TextInput
                                 style={styles.inputName}
-                                onChange={e => novoItem.nome = String(e)} />
+                                onChangeText={e => setItem({...novoItem, nome: e})} 
+                                value={novoItem.nome}/>
                             <Text>Descrição: </Text>
                             <TextInput
                                 style={styles.inputDescription}
                                 multiline={true}
                                 numberOfLines={4} 
-                                onChange={e => novoItem.descricao = String(e)} />
+                                onChangeText={text => setItem({...novoItem, descricao: text})} 
+                                value={novoItem.descricao}/>
                         </View>
                         <View style={styles.tipo}>
 
                             <View>
                                 <Text>Tipo: </Text>
-                                <Checkbox label='Armadura' checked={false} onChange={marcaCheck} />
-                                <Checkbox label='Material' checked={false} onChange={marcaCheck} />
+                                <Checkbox label='Armadura' checked={isArmorChecked} onChange={handleArmorCheck} />
+                                <Checkbox label='Material' checked={isMaterialChecked} onChange={handleMaterialCheck} 
+                                />
                             </View>
 
                             <View style={styles.inputView}>
@@ -63,38 +93,42 @@ export default function CriarProdutos() {
                                     placeholder="R$: "
                                     keyboardType="numeric"
                                     style={styles.input} 
-                                    onChange={e => novoItem.preco = Number(e)} />
+                                    onChangeText={e => setItem({...novoItem, preco: Number(e)})} 
+                                    value={String(novoItem.preco)}/>
                             </View>
                         </View>
 
-                        <View style={styles.outerInfoBox}>
+                        <View style={isArmorChecked ? styles.outerInfoBox : styles.outerInfoBoxDisabled}  pointerEvents={isArmorChecked ? 'auto' : 'none'}>
                             <View style={styles.infoBox}>
                                 <View style={styles.inputBox}>
                                     <Text>Defesa Mágica: </Text>
                                     <TextInput
                                         keyboardType="numeric"
                                         style={styles.input} 
-                                        onChange={e => novoItem.def_magica = Number(e)} />
+                                        onChangeText={e => setItem({...novoItem, def_magica: Number(e)})} 
+                                        value={String(novoItem.def_magica)}/>
                                 </View>
                                 <View style={styles.inputBox}>
                                     <Text>Defesa Física: </Text>
                                     <TextInput
                                         keyboardType="numeric"
                                         style={styles.input}
-                                        onChange={e => novoItem.def_fisica = Number(e)} />
+                                        onChangeText={e => setItem({...novoItem, def_fisica: Number(e)})}  
+                                        value={String(novoItem.def_fisica)}/>
                                 </View>
                                 <View style={styles.inputBox}>
                                     <Text>Durabilidade: </Text>
                                     <TextInput
                                         keyboardType="numeric"
                                         style={styles.input}
-                                        onChange={e => novoItem.durabilidade = Number(e)} />
+                                        onChangeText={e => setItem({...novoItem, durabilidade: Number(e)})}  
+                                        value={String(novoItem.durabilidade)}/>
                                 </View>
                             </View>
                         </View>
 
                         <View style={styles.botoes}>
-                            <Button title='Cancelar' />
+                            <Button title='Cancelar'onPress={cancelaItem}/>
                             <Button title='Salvar' />
                         </View>
                     </View>
