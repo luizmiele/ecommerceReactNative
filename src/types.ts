@@ -57,3 +57,7 @@ export interface SearchBar{
     onPressLupa?: () => void;
     [key: string]: any;
 }
+
+export interface FooterProps extends TouchableOpacityProps {
+    onPress?: () => void;
+}
