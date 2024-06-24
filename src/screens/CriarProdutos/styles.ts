@@ -10,7 +10,7 @@ export const styles = StyleSheet.create ({
     janela: {
         flex: 1, 
         justifyContent: 'center',
-        padding: 20
+        padding: 20,
     },
     todos: {
         flex: 1,
@@ -18,8 +18,11 @@ export const styles = StyleSheet.create ({
         padding: 10, 
         gap: 10
     },
+    main: {
+        marginBottom: 10
+    },
     tipo: {
-        flex: 1, 
+        flex: 0.33, 
         flexDirection: 'row',
         gap: 20
     },
@@ -37,6 +40,43 @@ export const styles = StyleSheet.create ({
         backgroundColor: '#FFF',
         borderRightColor: "#FFF",
         borderBottomColor: "#FFF",
+    },
+    inputDescription: {
+        width: "95%",
+        height: 90,
+        paddingHorizontal: 8,
+        borderWidth: 2,
+        backgroundColor: '#FFF',
+        borderRightColor: "#FFF",
+        borderBottomColor: "#FFF",
+    },
+    outerInfoBox: {
+        flex: 1,
+        backgroundColor: "#f0f0f0",
+        padding: 1,
+        marginHorizontal: 5,
+        marginBottom: 5,
+    },
+    infoBox: {
+        flex:1,
+        zIndex: 1,
+        paddingTop: 20,
+        padding: 10,
+        gap: 10,
+        backgroundColor: "#C3C7CB",
+        borderColor: "#606060",
+        borderWidth: 2,
+        shadowColor: '#fff',
+        shadowOffset: { width: -2, height: -2 },
+        shadowOpacity: 1,
+        shadowRadius: 2,
+    },
+    botoes: {
+        flex: 0.2,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        gap: 20,
+        paddingBottom: 10
     },
     footerContainer: {
         position: "absolute",

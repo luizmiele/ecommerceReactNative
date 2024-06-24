@@ -4,6 +4,7 @@ import Janela from "../../components/Janela";
 import DisplayItem from "../../components/DisplayItem";
 import Input from "../../components/Input";
 import Checkbox from "../../components/Checkbox";
+import Button from "../../components/Button";
 
 export default function CriarProdutos() {
 
@@ -18,14 +19,18 @@ export default function CriarProdutos() {
             <View style={styles.janela}>
                 <Janela header="Criar Produtos" height={"90%"} width={"90%"}>
                     <View style={styles.todos}>
+                        
                         <DisplayItem itemImage={imageItem} />
-                        <Text>Nome: </Text>
-                        <Input />
-                        <Text>Descrição: </Text>
-                        <Input />
-
+                        
+                        <View style={styles.main}>
+                            <Text>Nome: </Text>
+                            <Input />
+                            <Text>Descrição: </Text>
+                            <TextInput
+                                style={styles.inputDescription} />
+                        </View>
                         <View style={styles.tipo}>
-                            
+
                             <View>
                                 <Text>Tipo: </Text>
                                 <Checkbox label='Armadura' checked={false} onChange={marcaCheck} />
@@ -35,10 +40,21 @@ export default function CriarProdutos() {
                             <View style={styles.inputView}>
                                 <Text>Preço: </Text>
                                 <TextInput
-                                placeholder="R$: "
-                                keyboardType="numeric"
-                                style={styles.input} />
+                                    placeholder="R$: "
+                                    keyboardType="numeric"
+                                    style={styles.input} />
                             </View>
+                        </View>
+
+                        <View style={styles.outerInfoBox}>
+                            <View style={styles.infoBox}>
+
+                            </View>
+                        </View>
+
+                        <View style={styles.botoes}>
+                            <Button title='Cancelar' style={styles.botao} />
+                            <Button title='Salvar' style={styles.botao} />
                         </View>
                     </View>
                 </Janela>
