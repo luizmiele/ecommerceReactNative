@@ -1,9 +1,9 @@
 import { TouchableOpacity, Text, Image, View } from "react-native";
 import { styles } from "./styles";
 
-export default function ItemFound() {
+export default function ItemFound({onPress, ...rest}: any) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress} >
       <View style={styles.geral}>
         <View style={styles.imgContainer}>
           <Image
