@@ -14,6 +14,17 @@ export type itemFoundProps={
     onPress?:()=>void;
     titulo: string;
     imagem:string;
+    description:string;
+    price:number,
+    type:string,
+}
+export type itens={
+    id:number|string;
+    name:string;
+    description:string
+    img:string;
+    price:number
+    type:string
 }
 
 export type propsJanela = {
