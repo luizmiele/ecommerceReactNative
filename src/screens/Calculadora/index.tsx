@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { TouchableOpacity, View } from "react-native";
-import { Text } from "react-native-elements";
+import { TouchableOpacity, View, Text } from "react-native";
 import { styles } from "./styles";
 import Janela from "../../components/Janela";
 
@@ -16,9 +15,9 @@ export default function Calculadora() {
 
   const handleInput = (value: string) => {
     if (value === "C") {
-      setInput("0.");
+      setInput("0");
     } else {
-      setInput(input === "0." ? value : input + value);
+      setInput(input === "0" ? value : input + value);
     }
   };
 
