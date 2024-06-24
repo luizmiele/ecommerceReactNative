@@ -7,8 +7,6 @@ export const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         
-        
-        
     },
     modalContent: {
         backgroundColor: "#C3C7CB",

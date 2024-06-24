@@ -58,6 +58,20 @@ export interface SearchBar{
     [key: string]: any;
 }
 
+
+export type Item = {
+    imagem: string,
+    imagem64: string,
+    nome: string,
+    descricao: string,
+    tipo: string,
+    preco: number,
+    def_magica: number,
+    def_fisica: number,
+    durabilidade: number
+}
+
+
 export interface FooterProps extends TouchableOpacityProps {
     onPress?: () => void;
 }
