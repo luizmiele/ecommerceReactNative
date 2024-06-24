@@ -26,3 +26,9 @@ export interface IconProps extends TouchableOpacityProps {
     textStyle?: StyleProp<TextStyle>;
     onPress: () => void;
 }
+
+export interface SearchBar{
+    style?: object;
+    onPressLupa?: () => void;
+    [key: string]: any;
+}
