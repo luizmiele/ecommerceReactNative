@@ -44,6 +44,7 @@ export interface SearchBar{
 
 export type Item = {
     imagem: string,
+    imagem64: string,
     nome: string,
     descricao: string,
     tipo: string,

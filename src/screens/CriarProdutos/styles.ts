@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native"
 
-export const styles = StyleSheet.create ({
+export const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
@@ -8,18 +8,22 @@ export const styles = StyleSheet.create ({
         alignItems: 'center'
     },
     janela: {
-        flex: 1, 
         justifyContent: 'center',
         padding: 30,
+    },
+    scrollContainer: {
+        flex:1,
+        flexGrow: 1,
+        justifyContent: 'center',
     },
     todos: {
         flex: 1,
         width: 350,
-        padding: 10, 
+        padding: 10,
         gap: 5
     },
     tipo: {
-        flex: 1, 
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center'
     },
@@ -70,7 +74,7 @@ export const styles = StyleSheet.create ({
         opacity: 0.5
     },
     infoBox: {
-        flex:1,
+        flex: 1,
         backgroundColor: "#C3C7CB",
         borderColor: "#606060",
         padding: 10,
@@ -78,12 +82,12 @@ export const styles = StyleSheet.create ({
         shadowColor: '#fff',
         shadowOffset: { width: -2, height: -2 },
         shadowOpacity: 1,
-        shadowRadius: 2,
+        shadowRadius: 2
     },
     inputBox: {
         flex: 1,
         width: '50%',
-        flexDirection: 'row', 
+        flexDirection: 'row',
         justifyContent: 'space-between',
         gap: 30
     },
@@ -122,7 +126,7 @@ export const styles = StyleSheet.create ({
     },
     btnText: {
         color: "#000",
-        fontWeight:"500",
+        fontWeight: "500",
     }
-        
+
 })
