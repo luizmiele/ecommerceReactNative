@@ -10,6 +10,12 @@ export interface InputProps extends TextInputProps {
     style?: StyleProp<ViewStyle>;
 }
 
+export type itemFoundProps={
+    onPress?:()=>void;
+    titulo: string;
+    imagem:string;
+}
+
 export type propsJanela = {
     header?: string | number | null;
     onPress?: () => void,
