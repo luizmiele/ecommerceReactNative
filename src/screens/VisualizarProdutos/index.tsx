@@ -1,24 +1,24 @@
-import { Text, View, Image, Alert, TouchableOpacity, FlatList } from "react-native";
+import { Text, View, Image, FlatList } from "react-native";
 import Janela from "../../components/Janela";
 import { styles } from "./styles";
-import Button from "../../components/Button/index";
 import ItemFound from "../../components/ItemFound/index";
 import { useEffect, useState } from "react";
-import { Modal } from "../../components/Modal";
 import { getAllItens } from "../../services/Api/api";
 import { itens } from "../../types";
 import SearchBar from "../../components/SearchBar";
 
 export default function VisualizarProdutos() {
 
-  const [lista, setLista] = useState<itens>([])
+  const [lista, setLista] = useState<itens[]>([])
   const [loading, setLoading] = useState<boolean>(false)
+
 
   async function getAll() {
     setLoading(true)
     try {
       const result = await getAllItens();
-      setLista(result)
+      if (result !== null)
+        setLista(result)
     } catch (err) {
       console.log(err)
     }
@@ -26,7 +26,6 @@ export default function VisualizarProdutos() {
       setLoading(false)
     }, 5000);
   }
-
   useEffect(() => {
     getAll();
   }, [])
@@ -38,15 +37,14 @@ export default function VisualizarProdutos() {
           <View>
             <Text style={{ textAlign: 'center' }}>TODOS</Text>
           </View>
-
         </View>
         <View style={styles.geral}>
           <SearchBar style={styles.searchBar} />
           {
-            (loading ? <View style={{marginTop:20,height:'100%'}}><Image style={{height:250,width:250,resizeMode:'contain'}}source={require('../../../assets/icons/tshell32_170.gif')}/></View>: <FlatList numColumns={(2)}
+            (loading ? <View style={{ marginTop: 20, height: '100%' }}><Image style={{ height: 250, width: 250, resizeMode: 'contain' }} source={require('../../../assets/icons/tshell32_170.gif')} /></View> : <FlatList numColumns={(2)}
               data={lista}
-              renderItem={({ item }) => <ItemFound description={item.description} price={item.price} type={item.type} titulo={item.name} imagem={item.img} />}
-              keyExtractor={item => item.id}
+              renderItem={({ item }) => <ItemFound description={item.description} price={item.price} type={item.type} titulo={item.name} imagem={item.img} metadata={item.metadata}/>}
+              keyExtractor={item => item.id.toString()}
             />)
           }
         </View>
@@ -54,3 +52,4 @@ export default function VisualizarProdutos() {
     </View>
   );
 }
+

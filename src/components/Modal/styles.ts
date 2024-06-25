@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 2,
         paddingBottom: 10,
         width: "90%",
-        height: "65%"
+        height: "70%"
     },
     imgContainer: {
         top: 10,
@@ -94,6 +94,9 @@ export const styles = StyleSheet.create({
         gap: 5,
     },
     label: {
+        
+    },
+    specsContent:{
         
     },
     checkboxContainer: {

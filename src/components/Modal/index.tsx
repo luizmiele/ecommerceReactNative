@@ -15,6 +15,11 @@ interface ModalProps {
     description: string;
     price: number,
     type: string,
+    metadata: {
+        durability: number,
+        phy_defense: number,
+        mag_defense: number,
+    }
     onClose: () => void;
 }
 
@@ -38,7 +43,7 @@ export const Modal = ({ ...rest }: ModalProps) => {
                         <Image
                             style={[styles.imgCentro]}
                             source={{ uri: rest.imagem }
-                        }
+                            }
                         />
                     </View>
                     <View style={styles.infoContainer}>
@@ -55,7 +60,7 @@ export const Modal = ({ ...rest }: ModalProps) => {
                                 </View>
                                 <View style={styles.priceInfoContent}>
                                     <Text style={styles.label}>Preço:</Text>
-                                    <Text style={{ fontStyle: 'italic' }}>{rest.price}</Text>
+                                    <Text style={{ fontStyle: 'italic' }}>{rest.price} Zezinhos</Text>
                                 </View>
                                 <View style={styles.typeInfoContent}>
                                     <Text style={styles.label}>Tipo:</Text>
@@ -63,6 +68,22 @@ export const Modal = ({ ...rest }: ModalProps) => {
                                         <Text style={{ fontStyle: 'italic' }}>{rest.type}</Text>
                                     </View>
                                 </View>
+                                {
+                                    rest.type === 'Armor' ? <View style={styles.typeInfoContent}>
+                                            <Text style={styles.label}>Detalhes:</Text>
+                                        <View style={styles.specsContent}>
+                                            <View style={styles.checkboxContainer}>
+                                                <Text style={{ fontStyle: 'italic' }}>Defesa Física: {rest.metadata.phy_defense}</Text>
+                                            </View>
+                                            <View style={styles.checkboxContainer}>
+                                                <Text style={{ fontStyle: 'italic' }}>Defesa Magica: {rest.metadata.mag_defense}</Text>
+                                            </View>
+                                            <View style={styles.checkboxContainer}>
+                                                <Text style={{ fontStyle: 'italic' }}>Durabilidade: {rest.metadata.durability}</Text>
+                                            </View>
+                                        </View>
+                                    </View> : null
+                                }
                             </View>
                         </View>
                         <View style={styles.buttonsContainer}>

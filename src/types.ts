@@ -17,6 +17,11 @@ export type itemFoundProps={
     description:string;
     price:number,
     type:string,
+    metadata:{
+        durability: number,
+        phy_defense: number,
+        mag_defense: number,
+    }
 }
 export type itens={
     id:number|string;
@@ -25,6 +30,11 @@ export type itens={
     img:string;
     price:number
     type:string
+    metadata:{
+        durability: number,
+        phy_defense: number,
+        mag_defense: number,
+    }
 }
 
 export type propsJanela = {
@@ -40,6 +50,7 @@ export type messageProps={
     titulo?:string | number | null
     error?:boolean | null;
     content: string | number | null;
+    ligado?:boolean;
 }
 
 export interface IconProps extends TouchableOpacityProps {
@@ -77,4 +88,13 @@ export interface ItemEquipment extends Item{
 
 export interface FooterProps extends TouchableOpacityProps {
     onPress?: () => void;
+}
+
+export type Colaborador = {
+        
+        nome:string,
+        email:string ,
+        linkedin:string ,
+        github:string ,
+        foto: ImageSourcePropType
 }
