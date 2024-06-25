@@ -84,6 +84,8 @@ export default function CriarProdutos() {
     };
 
     const cancelaItem = () => {
+        setIsArmorChecked(false);
+        setIsMaterialChecked(false);
         setItemEquipment({
             img: '',
             name: '',
