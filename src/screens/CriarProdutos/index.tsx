@@ -99,21 +99,25 @@ export default function CriarProdutos() {
     }
 
     const salvaItem = () => {
-        if (novoItemEquipment.type === 'material') {
-            setItem(novoItem);
-            let formData = new FormData();
-            formData = {...formData , ...novoItem};
-            postItem(formData);
-            cancelaItem();
+        let formData = new FormData();
+        if (isMaterialChecked) {
+            const item: Item = {
+                img: novoItemEquipment.img,
+                name: novoItemEquipment.name,
+                description: novoItemEquipment.description,
+                price: novoItemEquipment.price,
+                type: novoItemEquipment.type
+            }
+            formData = {...formData, ...item };
+        } else if (isArmorChecked) {
+            formData = { ...formData, ...novoItemEquipment };
+        } else {
+            alert('Nenhuma opção selecionada');
             return;
         }
-            setItem(novoItemEquipment);
-            let formData = new FormData();
-            formData = {...formData , ...novoItemEquipment};
-            postItem(formData);
-            cancelaItem();
-            return;
-    }
+
+        postItem(formData);
+    };
 
     console.log(novoItemEquipment);
 
