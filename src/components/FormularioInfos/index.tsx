@@ -1,18 +1,18 @@
-import { View} from "react-native";
+import { KeyboardAvoidingView, View } from "react-native";
 import { ItemEquipment } from "../../types";
 import FormularioInputs from "../FormularioInputs";
-import {styles} from "./styles";
+import { styles } from "./styles";
 
 export default function FormularioInfos({ itemEquipment, setItemEquipment, isArmorChecked }: { itemEquipment: ItemEquipment, setItemEquipment: any, isArmorChecked: boolean }) {
 
     const alternativeStyle = {
-        flex: 1, 
+        flex: 1,
         gap: 20,
         flexDirection: 'row',
     }
 
     const inputStyle = {
-        height: 25, 
+        height: 25,
         width: 100
     }
 
@@ -23,7 +23,9 @@ export default function FormularioInfos({ itemEquipment, setItemEquipment, isArm
                     isArmorChecked ?
                         'auto' : 'none'}
         >
-            <View style={styles.infoBox}>
+            <KeyboardAvoidingView
+                behavior="padding"
+                style={styles.infoBox}>
                 <View style={styles.inputBox}>
                     <FormularioInputs
                         label='Defesa Mágica:'
@@ -36,7 +38,9 @@ export default function FormularioInfos({ itemEquipment, setItemEquipment, isArm
                                 })}
 
                         defaultValue={itemEquipment.metadata.magic_defense}
-                          
+
+                        keyboardType="numeric"
+
                         alternativeStyle={alternativeStyle}
                         styleDefault={inputStyle} />
                 </View>
@@ -52,6 +56,8 @@ export default function FormularioInfos({ itemEquipment, setItemEquipment, isArm
                                 })}
 
                         defaultValue={itemEquipment.metadata.phy_defense}
+
+                        keyboardType="numeric"
 
                         alternativeStyle={alternativeStyle}
                         styleDefault={inputStyle} />
@@ -69,10 +75,12 @@ export default function FormularioInfos({ itemEquipment, setItemEquipment, isArm
 
                         defaultValue={itemEquipment.metadata.durability}
 
+                        keyboardType="numeric"
+
                         alternativeStyle={alternativeStyle}
                         styleDefault={inputStyle} />
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         </View>
     );
 }

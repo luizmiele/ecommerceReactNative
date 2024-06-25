@@ -16,6 +16,7 @@ export const styles = StyleSheet.create({
     },
     infoBox: {
         flex: 1,
+        position: 'relative',
         gap: 10,
         backgroundColor: "#C3C7CB",
         borderColor: "#606060",
@@ -28,6 +29,9 @@ export const styles = StyleSheet.create({
     },
     inputBox: {
         flex: 1,
+        padding: 5,
+        paddingLeft: 20,
+        paddingRight: 30,
         width: '50%',
         flexDirection: 'row',
         justifyContent: 'space-between',

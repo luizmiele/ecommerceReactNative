@@ -1,11 +1,31 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, KeyboardTypeOptions } from "react-native";
 import styles from "./styles";
 
-export default function FormularioHeader({label, onChangeText, defaultValue, styleDefault = null, alternativeStyle, multiLine, numberOfLines,}: {label: string, onChangeText: (e: any) => void, defaultValue: any, styleDefault: any, alternativeStyle?: Object, multiLine?: boolean, numberOfLines?: number}) {
+export default function FormularioHeader(
+    {
+        label,
+        onChangeText,
+        defaultValue,
+        styleDefault = null,
+        alternativeStyle,
+        multiLine,
+        numberOfLines,
+        keyboardType
+    }:
+        {
+            label: string,
+            onChangeText: (e: any) => void,
+            defaultValue: any,
+            styleDefault: any,
+            alternativeStyle?: Object,
+            multiLine?: boolean,
+            numberOfLines?: number,
+            keyboardType?: KeyboardTypeOptions
+        }) {
 
     const styleStandard = styles.inputName;
 
-    if(styleDefault != null) styleDefault = {...styles.inputName, ...styleDefault};
+    if (styleDefault != null) styleDefault = { ...styles.inputName, ...styleDefault };
 
     return (
         <View style={alternativeStyle || {}}>
@@ -14,8 +34,9 @@ export default function FormularioHeader({label, onChangeText, defaultValue, sty
                 style={styles == null ? styleStandard : styleDefault}
                 onChangeText={onChangeText}
                 value={defaultValue}
+                keyboardType={keyboardType}
                 multiline={multiLine}
-                numberOfLines={numberOfLines}/>
+                numberOfLines={numberOfLines} />
         </View>
     );
 }

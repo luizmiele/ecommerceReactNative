@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container:{
-        flex: 1,
+        height: 180,
         borderWidth: 2,
         backgroundColor: '#FFF',
         borderRightColor: "#FFF",
@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     },
     imageBackground: {
         flex: 1,
+        padding: 20,
         justifyContent: 'center',
         alignItems: 'center'
     },
