@@ -4,11 +4,12 @@ import Janela from "../../components/Janela";
 import DisplayItem from "../../components/DisplayItem";
 import Checkbox from "../../components/Checkbox";
 import Button from "../../components/Button";
-import { Item } from "../../types";
+import { Item, ItemEquipment } from "../../types";
 import { useState } from "react";
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
 import * as FileSystem from 'expo-file-system';
+import { postItem } from "../../services/Api/api";
 
 export default function CriarProdutos() {
 
@@ -18,15 +19,24 @@ export default function CriarProdutos() {
 
 
     const [novoItem, setItem] = useState<Item>({
-        imagem: '',
-        imagem64: '',
-        nome: '',
-        descricao: '',
-        tipo: '',
-        preco: 0,
-        def_magica: 0,
-        def_fisica: 0,
-        durabilidade: 0
+        img: '',
+        name: '',
+        description: '',
+        price: 0,
+        type: '',
+    });
+
+    const [novoItemEquipment, setItemEquipment] = useState<ItemEquipment>({
+        img: '',
+        name: '',
+        description: '',
+        price: 0,
+        type: '',
+        metadata: {
+            phy_defense: 0,
+            magic_defense: 0,
+            durability: 0
+        }
     });
 
 
@@ -46,13 +56,11 @@ export default function CriarProdutos() {
                     { compress: 0.5, format: ImageManipulator.SaveFormat.JPEG }
                 );
 
-                setItem({...novoItem, imagem: manipResult.uri});
-
                 const base64 = await FileSystem.readAsStringAsync(
                     manipResult.uri,
                     { encoding: FileSystem.EncodingType.Base64 }
                 );
-                setItem({...novoItem, imagem: base64});
+                setItem({ ...novoItem, img: base64 });
             }
         } catch (error) {
             console.error("Erro ao selecionar ou manipular a imagem:", error);
@@ -63,7 +71,7 @@ export default function CriarProdutos() {
         setIsArmorChecked(!isArmorChecked);
         if (!isArmorChecked) {
             setIsMaterialChecked(false);
-            setItem({ ...novoItem, tipo: 'armadura' });
+            setItemEquipment({ ...novoItemEquipment, type: 'armadura' });
         }
     };
 
@@ -71,25 +79,47 @@ export default function CriarProdutos() {
         setIsMaterialChecked(!isMaterialChecked);
         if (!isMaterialChecked) {
             setIsArmorChecked(false);
-            setItem({ ...novoItem, tipo: 'material' });
+            setItemEquipment({ ...novoItemEquipment, type: 'material' });
         }
     };
 
     const cancelaItem = () => {
-        setItem({
-            imagem: '',
-            imagem64: '',
-            nome: '',
-            descricao: '',
-            tipo: '',
-            preco: 0,
-            def_magica: 0,
-            def_fisica: 0,
-            durabilidade: 0
-        });
+        setItemEquipment({
+            img: '',
+            name: '',
+            description: '',
+            price: 0,
+            type: '',
+            metadata: {
+                phy_defense: 0,
+                magic_defense: 0,
+                durability: 0
+            }
+        })
     }
 
-    console.log(novoItem)
+    const salvaItem = () => {
+        let formData = new FormData();
+        if (isMaterialChecked) {
+            const item: Item = {
+                img: novoItemEquipment.img,
+                name: novoItemEquipment.name,
+                description: novoItemEquipment.description,
+                price: novoItemEquipment.price,
+                type: novoItemEquipment.type
+            }
+            formData = {...formData, ...item };
+        } else if (isArmorChecked) {
+            formData = { ...formData, ...novoItemEquipment };
+        } else {
+            alert('Nenhuma opção selecionada');
+            return;
+        }
+
+        postItem(formData);
+    };
+
+    console.log(novoItemEquipment);
 
     return (
         <View style={styles.container}>
@@ -99,20 +129,20 @@ export default function CriarProdutos() {
                         style={styles.todos}
                         behavior="height">
 
-                        <DisplayItem itemImage={novoItem.imagem} onPress={pickImage} />
+                        <DisplayItem itemImage={novoItem.img} onPress={pickImage} />
                         <View>
                             <Text>Nome: </Text>
                             <TextInput
                                 style={styles.inputName}
-                                onChangeText={e => setItem({ ...novoItem, nome: e })}
-                                value={novoItem.nome} />
+                                onChangeText={e => setItemEquipment({ ...novoItemEquipment, name: e })}
+                                value={novoItemEquipment.name} />
                             <Text>Descrição: </Text>
                             <TextInput
                                 style={styles.inputDescription}
                                 multiline={true}
                                 numberOfLines={4}
-                                onChangeText={text => setItem({ ...novoItem, descricao: text })}
-                                value={novoItem.descricao} />
+                                onChangeText={text => setItemEquipment({ ...novoItemEquipment, description: text })}
+                                value={novoItemEquipment.description} />
                         </View>
                         <View style={styles.tipo}>
 
@@ -129,8 +159,8 @@ export default function CriarProdutos() {
                                     placeholder="R$: "
                                     keyboardType="numeric"
                                     style={styles.input}
-                                    onChangeText={e => setItem({ ...novoItem, preco: Number(e) })}
-                                    value={String(novoItem.preco)} />
+                                    onChangeText={e => setItemEquipment({ ...novoItemEquipment, price: Number(e) })}
+                                    value={String(novoItemEquipment.price)} />
                             </View>
                         </View>
 
@@ -146,31 +176,40 @@ export default function CriarProdutos() {
                                     <TextInput
                                         keyboardType="numeric"
                                         style={styles.input}
-                                        onChangeText={e => setItem({ ...novoItem, def_magica: Number(e) })}
-                                        value={String(novoItem.def_magica)} />
+                                        onChangeText={e => setItemEquipment({
+                                            ...novoItemEquipment,
+                                            metadata: { ...novoItemEquipment.metadata, magic_defense: Number(e) }
+                                        })}
+                                        value={String(novoItemEquipment.metadata.magic_defense)} />
                                 </View>
                                 <View style={styles.inputBox}>
                                     <Text>Defesa Física: </Text>
                                     <TextInput
                                         keyboardType="numeric"
                                         style={styles.input}
-                                        onChangeText={e => setItem({ ...novoItem, def_fisica: Number(e) })}
-                                        value={String(novoItem.def_fisica)} />
+                                        onChangeText={e => setItemEquipment({
+                                            ...novoItemEquipment,
+                                            metadata: { ...novoItemEquipment.metadata, phy_defense: Number(e) }
+                                        })}
+                                        value={String(novoItemEquipment.metadata.phy_defense)} />
                                 </View>
                                 <View style={styles.inputBox}>
                                     <Text>Durabilidade: </Text>
                                     <TextInput
                                         keyboardType="numeric"
                                         style={styles.input}
-                                        onChangeText={e => setItem({ ...novoItem, durabilidade: Number(e) })}
-                                        value={String(novoItem.preco)} />
+                                        onChangeText={e => setItemEquipment({
+                                            ...novoItemEquipment,
+                                            metadata: { ...novoItemEquipment.metadata, durability: Number(e) }
+                                        })}
+                                        value={String(novoItemEquipment.metadata.durability)} />
                                 </View>
                             </View>
                         </View>
 
                         <View style={styles.botoes}>
                             <Button title='Cancelar' onPress={cancelaItem} />
-                            <Button title='Salvar' />
+                            <Button title='Salvar' onPress={salvaItem} />
                         </View>
                     </KeyboardAvoidingView>
                 </Janela>
