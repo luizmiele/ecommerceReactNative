@@ -78,3 +78,12 @@ export interface ItemEquipment extends Item{
 export interface FooterProps extends TouchableOpacityProps {
     onPress?: () => void;
 }
+
+export type Colaborador = {
+        
+        nome:string,
+        email:string ,
+        linkedin:string ,
+        github:string ,
+        foto: ImageSourcePropType
+}
