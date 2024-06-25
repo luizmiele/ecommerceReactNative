@@ -12,12 +12,12 @@ export const styles = StyleSheet.create({
         backgroundColor: "#f0f0f0",
         marginHorizontal: 5,
         marginBottom: 5,
-        opacity: 0.5
+        opacity: 0.5,
     },
     infoBox: {
         flex: 1,
         position: 'relative',
-        gap: 10,
+        gap: 5,
         backgroundColor: "#C3C7CB",
         borderColor: "#606060",
         padding: 10,

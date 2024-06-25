@@ -69,7 +69,7 @@ export interface Item{
 export interface ItemEquipment extends Item{
     metadata: {
         phy_defense: number,
-        magic_defense: number,
+        mag_defense: number,
         durability: number
     }
 }

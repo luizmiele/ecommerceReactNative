@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity, View, Image, TextInput, KeyboardAvoidingView, ScrollView } from "react-native";
+import { Text, TouchableOpacity, View, Image, TextInput, KeyboardAvoidingView, ScrollView, SafeAreaView } from "react-native";
 import { styles } from './styles';
 import Janela from "../../components/Janela";
 import Checkbox from "../../components/Checkbox";
@@ -10,7 +10,7 @@ import FormularioHeader from "../../components/FormularioHeader";
 import FormularioInputs from "../../components/FormularioInputs";
 import FormularioInfos from "../../components/FormularioInfos";
 
-export default function CriarProdutos() {
+export default function AtualizaProdutos() {
 
 
     const [isArmorChecked, setIsArmorChecked] = useState<boolean>(false);
@@ -33,25 +33,27 @@ export default function CriarProdutos() {
         type: '',
         metadata: {
             phy_defense: 0,
-            magic_defense: 0,
+            mag_defense: 0,
             durability: 0
         }
     });
 
     const handleArmorCheck = () => {
-        setIsArmorChecked(!isArmorChecked);
-        if (!isArmorChecked) {
-            setIsMaterialChecked(false);
-            setItemEquipment({ ...novoItemEquipment, type: 'armadura' });
-        }
+        setIsArmorChecked(true);
+        setIsMaterialChecked(false);
+        setItemEquipment({ ...novoItemEquipment, type: 'Armor' });
     };
 
     const handleMaterialCheck = () => {
-        setIsMaterialChecked(!isMaterialChecked);
-        if (!isMaterialChecked) {
+        setIsMaterialChecked(true);
             setIsArmorChecked(false);
-            setItemEquipment({ ...novoItemEquipment, type: 'material' });
-        }
+            setItemEquipment({
+                ...novoItemEquipment,
+                type: 'Material',
+                metadata: { 
+                    phy_defense: 0, mag_defense: 0, durability: 0 
+                }
+            });
     };
 
     const cancelaItem = () => {
@@ -65,7 +67,7 @@ export default function CriarProdutos() {
             type: '',
             metadata: {
                 phy_defense: 0,
-                magic_defense: 0,
+                mag_defense: 0,
                 durability: 0
             }
         })
@@ -101,59 +103,61 @@ export default function CriarProdutos() {
     return (
         <View style={styles.container}>
             <View style={styles.janela}>
-                <Janela header="Editar Produtos" height={700} width={"90%"}>
-                    <KeyboardAvoidingView
-                        style={styles.todos}
-                        behavior="height">
-
-                        <FormularioHeader itemEquipment={novoItemEquipment} setItemEquipment={setItemEquipment} />
-
-                        <ScrollView>
-                            <View>
-                                <FormularioInputs
-                                    label='Nome:'
-                                    onChangeText={e => setItemEquipment({ ...novoItemEquipment, name: e })}
-                                    defaultValue={novoItemEquipment.name}
-                                    styleDefault={{ height: 30 }}
-                                />
-                                <FormularioInputs
-                                    label='Descrição:'
-                                    onChangeText={e => setItemEquipment({ ...novoItemEquipment, description: e })}
-                                    defaultValue={novoItemEquipment.description}
-                                    styleDefault={{ height: 70 }}
-                                    multiLine={true}
-                                    numberOfLines={5} />
-                            </View>
-                            <View style={styles.tipo}>
+                    <Janela header="Editar Produtos" height={700} width={"90%"}>
+                        <KeyboardAvoidingView
+                            style={styles.todos}
+                            behavior="height">
+                            <FormularioHeader
+                                itemEquipment={novoItemEquipment}
+                                setItemEquipment={setItemEquipment}
+                                handleArmorCheck={handleArmorCheck}
+                                handleMaterialCheck={handleMaterialCheck}
+                                cancelaItem={cancelaItem}
+                            />
+                            <ScrollView>
                                 <View>
-                                    <Text>Tipo: </Text>
-                                    <Checkbox label='Armadura' checked={isArmorChecked} onChange={handleArmorCheck} />
-                                    <Checkbox label='Material' checked={isMaterialChecked} onChange={handleMaterialCheck}
+                                    <FormularioInputs
+                                        label='Nome:'
+                                        onChangeText={e => setItemEquipment({ ...novoItemEquipment, name: e })}
+                                        defaultValue={novoItemEquipment.name}
+                                        styleDefault={{ height: 30 }}
                                     />
+                                    <FormularioInputs
+                                        label='Descrição:'
+                                        onChangeText={e => setItemEquipment({ ...novoItemEquipment, description: e })}
+                                        defaultValue={novoItemEquipment.description}
+                                        styleDefault={{ height: 70 }}
+                                        multiLine={true}
+                                        numberOfLines={5} />
                                 </View>
-                                <View style={styles.inputView}>
-                                    <Text>Preço: </Text>
-                                    <TextInput
-                                        placeholder="R$: "
-                                        keyboardType="numeric"
-                                        style={styles.input}
-                                        onChangeText={e => setItemEquipment({ ...novoItemEquipment, price: Number(e) })}
-                                        value={String(novoItemEquipment.price)} />
+                                <View style={styles.tipo}>
+                                    <View>
+                                        <Text>Tipo: </Text>
+                                        <Checkbox label='Armadura' checked={isArmorChecked} onChange={handleArmorCheck} />
+                                        <Checkbox label='Material' checked={isMaterialChecked} onChange={handleMaterialCheck}
+                                        />
+                                    </View>
+                                    <View style={styles.inputView}>
+                                        <Text>Preço: </Text>
+                                        <TextInput
+                                            placeholder="R$: "
+                                            keyboardType="numeric"
+                                            style={styles.input}
+                                            onChangeText={e => setItemEquipment({ ...novoItemEquipment, price: Number(e) })}
+                                            value={String(novoItemEquipment.price)} />
+                                    </View>
                                 </View>
-                            </View>
-
-                            <FormularioInfos itemEquipment={novoItemEquipment} setItemEquipment={setItemEquipment} isArmorChecked={isArmorChecked} />
-
-                            <View style={styles.botoes}>
-                                <Button title='Deletar' onPress={deletaItem} />
-                                <Button title='Cancelar' onPress={cancelaItem} />
-                                <Button title='Editar' onPress={editaItem} />
-
-                            </View>
-                        </ScrollView>
-                    </KeyboardAvoidingView>
-                </Janela>
+                                <FormularioInfos itemEquipment={novoItemEquipment} setItemEquipment={setItemEquipment} isArmorChecked={isArmorChecked} />
+                                <View style={styles.botoes}>
+                                    <Button title='Deletar' onPress={deletaItem} />
+                                    <Button title='Cancelar' onPress={cancelaItem} />
+                                    <Button title='Editar' onPress={editaItem} />
+                                </View>
+                            </ScrollView>
+                        </KeyboardAvoidingView>
+                    </Janela>
             </View>
+            
             <View style={styles.footerContainer}>
                 <View style={styles.footerContent}>
                     <TouchableOpacity style={styles.btnStart}>

@@ -34,7 +34,7 @@ export default function CriarProdutos() {
         type: '',
         metadata: {
             phy_defense: 0,
-            magic_defense: 0,
+            mag_defense: 0,
             durability: 0
         }
     });
@@ -94,7 +94,7 @@ export default function CriarProdutos() {
             type: '',
             metadata: {
                 phy_defense: 0,
-                magic_defense: 0,
+                mag_defense: 0,
                 durability: 0
             }
         })
@@ -180,9 +180,9 @@ export default function CriarProdutos() {
                                         style={styles.input}
                                         onChangeText={e => setItemEquipment({
                                             ...novoItemEquipment,
-                                            metadata: { ...novoItemEquipment.metadata, magic_defense: Number(e) }
+                                            metadata: { ...novoItemEquipment.metadata, mag_defense: Number(e) }
                                         })}
-                                        value={String(novoItemEquipment.metadata.magic_defense)} />
+                                        value={String(novoItemEquipment.metadata.mag_defense)} />
                                 </View>
                                 <View style={styles.inputBox}>
                                     <Text>Defesa Física: </Text>

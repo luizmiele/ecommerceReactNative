@@ -15,7 +15,7 @@ export default function FormularioHeader(
         {
             label: string,
             onChangeText: (e: any) => void,
-            defaultValue: any,
+            defaultValue: string,
             styleDefault: any,
             alternativeStyle?: Object,
             multiLine?: boolean,

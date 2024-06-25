@@ -5,13 +5,28 @@ import * as ImageManipulator from 'expo-image-manipulator';
 import * as FileSystem from 'expo-file-system';
 import { useEffect, useState } from "react";
 import { getAllItens, getItemById } from "../../services/Api/api";
-import {ItemEquipment } from '../../types';
+import { ItemEquipment } from '../../types';
+import {styles} from "./styles";
 
-export default function FormularioHeader({ itemEquipment, setItemEquipment }: { itemEquipment: ItemEquipment, setItemEquipment: any }) {
+export default function FormularioHeader({
+    itemEquipment,
+    setItemEquipment,
+    handleMaterialCheck,
+    handleArmorCheck,
+    cancelaItem
+}: {
+    itemEquipment: ItemEquipment,
+    setItemEquipment: any,
+    handleMaterialCheck: () => void,
+    handleArmorCheck: () => void,
+    cancelaItem: () => void
+}) {
 
     const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
     const [data, setData] = useState<Object[]>([]);
+    const [value, setValue] = useState(null);
+    const [selecionaItem, setSelecionaItem] = useState(false);
+
 
 
     const pickImage = async () => {
@@ -56,13 +71,28 @@ export default function FormularioHeader({ itemEquipment, setItemEquipment }: { 
         fetchData();
     }, []);
 
+    let contador: number = 0;
+
+    useEffect(() => {
+        if (itemEquipment.type === 'Armor') {
+            handleArmorCheck();
+            return;
+        } else if (itemEquipment.type === 'Material') {
+            handleMaterialCheck();
+        }
+    }, [selecionaItem, itemEquipment.type]);
+
     const escolheItem = (id: any) => {
-        getItemById(id).then((item) => setItemEquipment({ ...itemEquipment, ...item }));
+        cancelaItem();
+        getItemById(id).then(
+            (item) => {
+                setItemEquipment({ ...itemEquipment, ...item });
+            })
+        setSelecionaItem(!selecionaItem);
     }
 
     return (
         <>
-            <DisplayItem itemImage={itemEquipment.img} onPress={pickImage} />
             <DropDownPicker
                 open={open}
                 value={value}
@@ -71,7 +101,9 @@ export default function FormularioHeader({ itemEquipment, setItemEquipment }: { 
                 setValue={setValue}
                 setItems={setData}
                 onSelectItem={(item) => escolheItem(item.value)}
+                style={styles.dropDown}
             />
+            <DisplayItem itemImage={itemEquipment.img} onPress={pickImage} />
         </>
     );
 }

@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     janela: {
         justifyContent: 'center',
         padding: 30,
+        maxHeight: '100%'
     },
     scrollContainer: {
         flex:1,
