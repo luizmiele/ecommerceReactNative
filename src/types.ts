@@ -58,17 +58,20 @@ export interface SearchBar{
     [key: string]: any;
 }
 
+export interface Item{
+    img: string,
+    name: string,
+    description: string,
+    price: number,
+    type: string,
+}
 
-export type Item = {
-    imagem: string,
-    imagem64: string,
-    nome: string,
-    descricao: string,
-    tipo: string,
-    preco: number,
-    def_magica: number,
-    def_fisica: number,
-    durabilidade: number
+export interface ItemEquipment extends Item{
+    metadata: {
+        phy_defense: number,
+        magic_defense: number,
+        durability: number
+    }
 }
 
 

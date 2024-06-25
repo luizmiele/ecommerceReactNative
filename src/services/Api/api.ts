@@ -33,7 +33,7 @@ export async function postItem(formData: FormData): Promise<FormData | null> {
         },
       });
   
-      if (response.status === 200) {
+      if (response.status === 201) {
         alert("Formulário enviado com sucesso!");
         console.log("Formulário enviado com sucesso:", response.data);
         return response.data;
