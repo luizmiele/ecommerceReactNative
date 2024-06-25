@@ -8,12 +8,14 @@ import { useEffect, useState } from "react";
 import { editItem } from "../../services/Api/api";
 import FormularioHeader from "../../components/FormularioHeader";
 import FormularioInputs from "../../components/FormularioInputs";
+import FormularioInfos from "../../components/FormularioInfos";
 
 export default function CriarProdutos() {
 
 
     const [isArmorChecked, setIsArmorChecked] = useState<boolean>(false);
     const [isMaterialChecked, setIsMaterialChecked] = useState<boolean>(false);
+    const [itemId, setItemId] = useState<string>('');
 
     const [novoItem, setItem] = useState<Item>({
         img: '',
@@ -88,11 +90,11 @@ export default function CriarProdutos() {
         }
     };
 
-    const pesquisaItem = () => {
+    const deletaItem = () => {
 
     }
 
-    const deletaItem = () => {
+    const editaItem = () => {
 
     }
 
@@ -110,16 +112,17 @@ export default function CriarProdutos() {
                             <FormularioInputs 
                             label='Nome:' 
                             onChangeText={e => setItemEquipment({ ...novoItemEquipment, name: e })} 
-                            defaultValue={novoItemEquipment.name}  
-                            multiLine={false}
-                            numberOfLines={1}/>
+                            defaultValue={novoItemEquipment.name}
+                            styleDefault={{height: 30}}
+                            />
 
                             <FormularioInputs 
                             label='Descrição:' 
                             onChangeText={e => setItemEquipment({ ...novoItemEquipment, description: e })} 
-                            defaultValue={novoItemEquipment.description}  
+                            defaultValue={novoItemEquipment.description}
+                            styleDefault={{height: 70}}
                             multiLine={true}
-                            numberOfLines={4}/>
+                            numberOfLines={5}/>
                         </View>
 
                         <View style={styles.tipo}>
@@ -142,53 +145,12 @@ export default function CriarProdutos() {
                             </View>
                         </View>
 
-                        <View
-                            style={isArmorChecked ?
-                                styles.outerInfoBox : styles.outerInfoBoxDisabled} pointerEvents={
-                                    isArmorChecked ?
-                                        'auto' : 'none'}
-                        >
-                            <View style={styles.infoBox}>
-                                <View style={styles.inputBox}>
-                                    <Text>Defesa Mágica: </Text>
-                                    <TextInput
-                                        keyboardType="numeric"
-                                        style={styles.input}
-                                        onChangeText={e => setItemEquipment({
-                                            ...novoItemEquipment,
-                                            metadata: { ...novoItemEquipment.metadata, magic_defense: Number(e) }
-                                        })}
-                                        value={String(novoItemEquipment.metadata.magic_defense)} />
-                                </View>
-                                <View style={styles.inputBox}>
-                                    <Text>Defesa Física: </Text>
-                                    <TextInput
-                                        keyboardType="numeric"
-                                        style={styles.input}
-                                        onChangeText={e => setItemEquipment({
-                                            ...novoItemEquipment,
-                                            metadata: { ...novoItemEquipment.metadata, phy_defense: Number(e) }
-                                        })}
-                                        value={String(novoItemEquipment.metadata.phy_defense)} />
-                                </View>
-                                <View style={styles.inputBox}>
-                                    <Text>Durabilidade: </Text>
-                                    <TextInput
-                                        keyboardType="numeric"
-                                        style={styles.input}
-                                        onChangeText={e => setItemEquipment({
-                                            ...novoItemEquipment,
-                                            metadata: { ...novoItemEquipment.metadata, durability: Number(e) }
-                                        })}
-                                        value={String(novoItemEquipment.metadata.durability)} />
-                                </View>
-                            </View>
-                        </View>
+                        <FormularioInfos itemEquipment={novoItemEquipment} setItemEquipment={setItemEquipment} isArmorChecked={isArmorChecked} />
 
                         <View style={styles.botoes}>
                             <Button title='Deletar' onPress={deletaItem} />
                             <Button title='Cancelar' onPress={cancelaItem} />
-                            <Button title='Editar' onPress={salvaItem} />
+                            <Button title='Editar' onPress={editaItem} />
                         </View>
                     </KeyboardAvoidingView>
                 </Janela>
