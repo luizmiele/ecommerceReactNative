@@ -10,7 +10,7 @@ export default function ItemFound({...rest }: itemFoundProps) {
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
   }
-
+  
   return (
     <TouchableOpacity onPress={toggleModal}>
       <View style={styles.geral}>
@@ -24,7 +24,7 @@ export default function ItemFound({...rest }: itemFoundProps) {
           <Text>{rest.titulo}</Text>
         </View>
       </View>
-      <Modal description={rest.description} imagem={rest.imagem} titulo={rest.titulo} price={rest.price} type={rest.type} isModalVisible={isModalVisible} onClose={toggleModal} />
+      <Modal description={rest.description} imagem={rest.imagem} titulo={rest.titulo} price={rest.price} type={rest.type} metadata={rest.metadata} isModalVisible={isModalVisible} onClose={toggleModal} />
     </TouchableOpacity>
 
   );

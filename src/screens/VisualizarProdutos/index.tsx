@@ -26,7 +26,6 @@ export default function VisualizarProdutos() {
       setLoading(false)
     }, 5000);
   }
-
   useEffect(() => {
     getAll();
   }, [])
@@ -38,14 +37,13 @@ export default function VisualizarProdutos() {
           <View>
             <Text style={{ textAlign: 'center' }}>TODOS</Text>
           </View>
-
         </View>
         <View style={styles.geral}>
           <SearchBar style={styles.searchBar} />
           {
             (loading ? <View style={{ marginTop: 20, height: '100%' }}><Image style={{ height: 250, width: 250, resizeMode: 'contain' }} source={require('../../../assets/icons/tshell32_170.gif')} /></View> : <FlatList numColumns={(2)}
               data={lista}
-              renderItem={({ item }) => <ItemFound description={item.description} price={item.price} type={item.type} titulo={item.name} imagem={item.img} />}
+              renderItem={({ item }) => <ItemFound description={item.description} price={item.price} type={item.type} titulo={item.name} imagem={item.img} metadata={item.metadata}/>}
               keyExtractor={item => item.id.toString()}
             />)
           }
