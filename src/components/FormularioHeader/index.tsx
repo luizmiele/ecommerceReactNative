@@ -30,29 +30,31 @@ export default function FormularioHeader({
 
   const pickImage = async () => {
     try {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-
-      if (!result.canceled) {
-        const manipResult = await ImageManipulator.manipulateAsync(
-          result.assets[0].uri,
-          [{ resize: { width: 400 } }],
-          { compress: 0.5, format: ImageManipulator.SaveFormat.JPEG }
-        );
-
-        const base64 = await FileSystem.readAsStringAsync(manipResult.uri, {
-          encoding: FileSystem.EncodingType.Base64,
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
         });
-        setItemEquipment({ ...itemEquipment, img: base64 });
-      }
+
+        if (!result.canceled) {
+            const manipResult = await ImageManipulator.manipulateAsync(
+                result.assets[0].uri,
+                [{ resize: { width: 400 } }],
+                { compress: 0.5, format: ImageManipulator.SaveFormat.JPEG }
+            );
+
+            const base64 = await FileSystem.readAsStringAsync(
+                manipResult.uri,
+                { encoding: FileSystem.EncodingType.Base64 }
+            );
+            
+            setItemEquipment({ ...itemEquipment, img: `data:image/jpeg;base64,${String(base64)}` });
+        }
     } catch (error) {
-      console.error("Erro ao selecionar ou manipular a imagem:", error);
+        console.error("Erro ao selecionar ou manipular a imagem:", error);
     }
-  };
+};
 
   const fetchData = async () => {
     try {
@@ -70,6 +72,7 @@ export default function FormularioHeader({
     } catch (err) {
       console.log(err);
     }
+    
   };
 
   useEffect(() => {
