@@ -76,7 +76,7 @@ export interface SearchBar {
 }
 
 export interface Item {
-    img: string,
+    img: string ,
     name: string,
     description: string,
     price: number,

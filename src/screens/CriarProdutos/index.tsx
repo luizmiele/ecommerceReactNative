@@ -41,7 +41,6 @@ export default function CriarProdutos() {
         }
     });
 
-
     const pickImage = async () => {
         try {
             let result = await ImagePicker.launchImageLibraryAsync({
@@ -62,13 +61,13 @@ export default function CriarProdutos() {
                     manipResult.uri,
                     { encoding: FileSystem.EncodingType.Base64 }
                 );
-                setItem({ ...novoItem, img: base64 });
+                
+                setItemEquipment({ ...novoItemEquipment, img: `data:image/jpeg;base64,${String(base64)}` });
             }
         } catch (error) {
             console.error("Erro ao selecionar ou manipular a imagem:", error);
         }
     };
-
     const handleArmorCheck = () => {
         setIsArmorChecked(!isArmorChecked);
         if (!isArmorChecked) {
@@ -125,8 +124,6 @@ export default function CriarProdutos() {
         postItem(formData);
     };
 
-    console.log(novoItemEquipment);
-
     return (
         <View style={styles.container}>
             <View style={styles.janela}>
@@ -135,7 +132,7 @@ export default function CriarProdutos() {
                         style={styles.todos}
                         behavior="height">
 
-                        <DisplayItem itemImage={novoItem.img} onPress={pickImage} />
+                        <DisplayItem itemImage={novoItemEquipment.img} onPress={pickImage} />
                         <View>
                             <Text>Nome: </Text>
                             <TextInput

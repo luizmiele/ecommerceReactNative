@@ -17,6 +17,10 @@ export const styles = StyleSheet.create({
     image: {
         flex: 1,
         width: 100
+    },
+    userImage: {
+        flex:1,
+        height: 1000,
+        width: 1000
     }
-
 });
