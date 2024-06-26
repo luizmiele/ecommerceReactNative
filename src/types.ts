@@ -151,3 +151,10 @@ export type PrivateStackNavigation = {
     PortugolStudio: undefined;
     Calculadora: undefined;
 };
+
+export type App = {
+    id: number, 
+    name: string, 
+    image: string, 
+    rating: number
+}
