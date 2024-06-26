@@ -1,5 +1,5 @@
 import { Modal as ModalContainer, View, Image, Text } from "react-native";
-import { StackTypes } from "../../routes/stack";
+import { PrivateStackTypes } from "../../routes/privateStack";
 import { useNavigation } from "@react-navigation/native";
 import { CheckBox } from "react-native-elements";
 import { useState } from "react";
@@ -25,7 +25,7 @@ interface ModalProps {
 
 export const Modal = ({ ...rest }: ModalProps) => {
 
-    const navigation = useNavigation<StackTypes>();
+    const navigation = useNavigation<PrivateStackTypes>();
 
     function handlesignIn() {
         navigation.navigate("AtualizarProdutos");

@@ -1,22 +1,29 @@
-import { useNavigation } from "@react-navigation/native";
-import { LoginProps, StackTypes } from "../../routes/stack";
-import { View, Text, Image } from "react-native";
-import { styles } from "./styles";
-import { useState } from "react";
+import { View, Text, Image, Alert } from "react-native";
+import { useState, useContext } from "react";
+import { AuthCtx } from "../../contexts/AuthCtx";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
-
+import { styles } from "./styles";
 
 export default function Login() {
-    const navigation = useNavigation<StackTypes>();
     const [openCard, setOpenCard] = useState<boolean>(false);
-    const [username, setUsername] = useState<string>('user');
-    const [password, setPassword] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [senha, setSenha] = useState<string>('');
 
-    function handlesignIn() {
-        navigation.navigate("Workspace");
+    const { login, loading } = useContext(AuthCtx);
+
+    async function handlesignInPress() {
+        try {
+            const logado = await login(email, senha);
+            if (logado) {
+                //navigation.navigate("Workspace");
+            } else {
+                Alert.alert("Falha no Login", "Email ou senha inválidos");
+            }
+        } catch (error) {
+            Alert.alert("Erro de login", "Ocoreu um erro ao tentar efetuar login");
+        }
     };
-
     function handleCancel() {
         setOpenCard(false);
     };
@@ -25,51 +32,62 @@ export default function Login() {
         setOpenCard(true);
     };
 
-    return (
-        <View style={styles.container}>
-
-            {openCard ? (<View style={styles.cardContainer}>
-                <View style={styles.headerCardContainer}>
-                    <View style={styles.headerCardContent}>
-                        <Text style={styles.title}>Enter Password</Text>
-                        <Image
-                            source={require("../../../assets/icons/botao-fechar.png")} />
-                    </View>
-                </View>
-                <View style={styles.logoContainer}>
-                    <Text style={styles.titleLogo}>PORTUGOL</Text>
-                    <Text style={styles.subtitleLogo}>Ecommerce</Text>
-                </View>
-                <View style={styles.formContainer}>
-                    <Text style={styles.label}>Select user name:</Text>
-                    <Input
-                        value={username}
-                        onChangeText={(text: string) => setUsername(text)}
-                    />
-                    <Text style={styles.label}>Password:</Text>
-                    <Input
-                        value={password}
-                        onChangeText={(text: string) => setPassword(text)}
-                        secureTextEntry={true}
-                    />
-                    <View style={styles.buttonContainer}>
-                        <Button style={styles.btn} title="0K" onPress={handlesignIn} />
-                        <Button style={styles.btn} title="Cancel" onPress={handleCancel} />
-                    </View>
-                </View>
+    if (loading) {
+        return (
+            <View style={styles.container}>
+                <Image
+                    source={require("../../../assets/icons/loading-icon.gif")}
+                />
             </View>
-            ) : (
-                <View>
-                    <Text style={styles.titleLogo}>PORTUGOL</Text>
-                    <Text style={styles.subtitleLogo}>Ecommerce</Text>
-                    <View style={{alignItems: "center"}}>
-                    <Button
-                        title="Login"
-                        onPress={handleOpenCard}
-                    />
+        );
+    } else {
+
+        return (
+            <View style={styles.container}>
+
+                {openCard ? (<View style={styles.cardContainer}>
+                    <View style={styles.headerCardContainer}>
+                        <View style={styles.headerCardContent}>
+                            <Text style={styles.title}>Enter Password</Text>
+                            <Image
+                                source={require("../../../assets/icons/botao-fechar.png")} />
+                        </View>
+                    </View>
+                    <View style={styles.logoContainer}>
+                        <Text style={styles.titleLogo}>PORTUGOL</Text>
+                        <Text style={styles.subtitleLogo}>Ecommerce</Text>
+                    </View>
+                    <View style={styles.formContainer}>
+                        <Text style={styles.label}>Select user name:</Text>
+                        <Input
+                            value={email}
+                            onChangeText={(text: string) => setEmail(text)}
+                        />
+                        <Text style={styles.label}>Password:</Text>
+                        <Input
+                            value={senha}
+                            onChangeText={(text: string) => setSenha(text)}
+                            secureTextEntry
+                        />
+                        <View style={styles.buttonContainer}>
+                            <Button style={styles.btn} title="0K" onPress={handlesignInPress} />
+                            <Button style={styles.btn} title="Cancel" onPress={handleCancel} />
+                        </View>
                     </View>
                 </View>
-            )}
-        </View>
-    );
+                ) : (
+                    <View>
+                        <Text style={styles.titleLogo}>PORTUGOL</Text>
+                        <Text style={styles.subtitleLogo}>Ecommerce</Text>
+                        <View style={{ alignItems: "center" }}>
+                            <Button
+                                title="Login"
+                                onPress={handleOpenCard}
+                            />
+                        </View>
+                    </View>
+                )}
+            </View>
+        );
+    }
 }
