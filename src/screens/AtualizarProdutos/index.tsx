@@ -9,6 +9,30 @@ import { editItem, deleteLogico } from "../../services/Api/api";
 import FormularioHeader from "../../components/FormularioHeader";
 import FormularioInputs from "../../components/FormularioInputs";
 import FormularioInfos from "../../components/FormularioInfos";
+import Mensagem from "../../components/Mensagem";
+
+const itemJson = {
+    img: '',
+    name: '',
+    description: '',
+    price: 0,
+    type: '',
+    status: '',
+}
+
+const itemEquipmentJson = {
+    img: '',
+    name: '',
+    description: '',
+    price: 0,
+    type: '',
+    status: '',
+    metadata: {
+        phy_defense: 0,
+        mag_defense: 0,
+        durability: 0
+    }
+}
 
 export default function AtualizaProdutos() {
 
@@ -16,29 +40,12 @@ export default function AtualizaProdutos() {
     const [isArmorChecked, setIsArmorChecked] = useState<boolean>(false);
     const [isMaterialChecked, setIsMaterialChecked] = useState<boolean>(false);
     const [itemId, setItemId] = useState<string>('');
+    const [verificador, setVerificador] = useState<boolean>(false);
 
-    const [novoItem, setItem] = useState<Item>({
-        img: '',
-        name: '',
-        description: '',
-        price: 0,
-        type: '',
-        status: 'ativo',
-    });
 
-    const [novoItemEquipment, setItemEquipment] = useState<ItemEquipment>({
-        img: '',
-        name: '',
-        description: '',
-        price: 0,
-        type: '',
-        status: 'ativo',
-        metadata: {
-            phy_defense: 0,
-            mag_defense: 0,
-            durability: 0
-        }
-    });
+    const [novoItem, setItem] = useState<Item>(itemJson);
+
+    const [novoItemEquipment, setItemEquipment] = useState<ItemEquipment>(itemEquipmentJson);
 
     const handleArmorCheck = () => {
         setIsArmorChecked(true);
@@ -48,14 +55,14 @@ export default function AtualizaProdutos() {
 
     const handleMaterialCheck = () => {
         setIsMaterialChecked(true);
-            setIsArmorChecked(false);
-            setItemEquipment({
-                ...novoItemEquipment,
-                type: 'Material',
-                metadata: { 
-                    phy_defense: 0, mag_defense: 0, durability: 0 
-                }
-            });
+        setIsArmorChecked(false);
+        setItemEquipment({
+            ...novoItemEquipment,
+            type: 'Material',
+            metadata: {
+                phy_defense: 0, mag_defense: 0, durability: 0
+            }
+        });
     };
 
     const cancelaItem = () => {
@@ -78,14 +85,24 @@ export default function AtualizaProdutos() {
 
     const deletaItem = () => {
         deleteLogico(itemId)
+        cancelaItem();
+    }
+
+    const verificaInputVazio = (item: any, jsonVerificador: any) => {
+        for (let chave in item) {
+            if (item[chave] == jsonVerificador[chave]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     const editaItem = () => {
-        
-        console.log('meu id:' + itemId);
-
         let formData = new FormData();
-        if (isMaterialChecked) {
+        
+        const jsonVerificador: Item = itemJson;
+
+        if(isMaterialChecked) {
             const item: Item = {
                 img: novoItemEquipment.img,
                 name: novoItemEquipment.name,
@@ -94,76 +111,94 @@ export default function AtualizaProdutos() {
                 type: novoItemEquipment.type,
                 status: 'ativo',
             }
-            formData = {...formData, ...item };
+
+            const verificaInputVazio = (item: any, jsonVerificador: any) => {
+                for (let chave in item) {
+                    if (item[chave] == jsonVerificador[chave]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            if (verificaInputVazio(item, jsonVerificador)) {
+                setVerificador(verificaInputVazio(item, jsonVerificador))
+                return;
+            }
+
+            formData = { ...formData, ...item };
         } else if (isArmorChecked) {
+
+            if (verificaInputVazio(novoItemEquipment, jsonVerificador)) {
+                setVerificador(verificaInputVazio(novoItemEquipment, jsonVerificador))
+                return;
+            }
+
             formData = { ...formData, ...novoItemEquipment };
-        } else {
-            alert('Nenhuma opção selecionada');
-            return;
         }
 
         editItem(itemId, formData);
-    }
+    };
 
     return (
         <View style={styles.container}>
             <View style={styles.janela}>
-                    <Janela header="Editar Produtos" height={700} width={"90%"}>
-                        <KeyboardAvoidingView
-                            style={styles.todos}
-                            behavior="height">
-                            <FormularioHeader
-                                itemEquipment={novoItemEquipment}
-                                setItemEquipment={setItemEquipment}
-                                setItemId={setItemId}
-                                handleArmorCheck={handleArmorCheck}
-                                handleMaterialCheck={handleMaterialCheck}
-                                cancelaItem={cancelaItem}
-                            />
-                            <ScrollView>
+                <Janela header="Editar Produtos" height={700} width={"90%"}>
+                    <KeyboardAvoidingView
+                        style={styles.todos}
+                        behavior="height">
+                        <FormularioHeader
+                            itemEquipment={novoItemEquipment}
+                            setItemEquipment={setItemEquipment}
+                            setItemId={setItemId}
+                            handleArmorCheck={handleArmorCheck}
+                            handleMaterialCheck={handleMaterialCheck}
+                            cancelaItem={cancelaItem}
+                        />
+                        <ScrollView>
+                            <View>
+                                <FormularioInputs
+                                    label='Nome:'
+                                    onChangeText={e => setItemEquipment({ ...novoItemEquipment, name: e })}
+                                    defaultValue={novoItemEquipment.name}
+                                    styleDefault={{ height: 30 }}
+                                />
+                                <FormularioInputs
+                                    label='Descrição:'
+                                    onChangeText={e => setItemEquipment({ ...novoItemEquipment, description: e })}
+                                    defaultValue={novoItemEquipment.description}
+                                    styleDefault={{ height: 70 }}
+                                    multiLine={true}
+                                    numberOfLines={5} />
+                            </View>
+                            <View style={styles.tipo}>
                                 <View>
-                                    <FormularioInputs
-                                        label='Nome:'
-                                        onChangeText={e => setItemEquipment({ ...novoItemEquipment, name: e })}
-                                        defaultValue={novoItemEquipment.name}
-                                        styleDefault={{ height: 30 }}
+                                    <Text>Tipo: </Text>
+                                    <Checkbox label='Armadura' checked={isArmorChecked} onChange={handleArmorCheck} />
+                                    <Checkbox label='Material' checked={isMaterialChecked} onChange={handleMaterialCheck}
                                     />
-                                    <FormularioInputs
-                                        label='Descrição:'
-                                        onChangeText={e => setItemEquipment({ ...novoItemEquipment, description: e })}
-                                        defaultValue={novoItemEquipment.description}
-                                        styleDefault={{ height: 70 }}
-                                        multiLine={true}
-                                        numberOfLines={5} />
                                 </View>
-                                <View style={styles.tipo}>
-                                    <View>
-                                        <Text>Tipo: </Text>
-                                        <Checkbox label='Armadura' checked={isArmorChecked} onChange={handleArmorCheck} />
-                                        <Checkbox label='Material' checked={isMaterialChecked} onChange={handleMaterialCheck}
-                                        />
-                                    </View>
-                                    <View style={styles.inputView}>
-                                        <Text>Preço: </Text>
-                                        <TextInput
-                                            placeholder="R$: "
-                                            keyboardType="numeric"
-                                            style={styles.input}
-                                            onChangeText={e => setItemEquipment({ ...novoItemEquipment, price: Number(e) })}
-                                            value={String(novoItemEquipment.price)} />
-                                    </View>
+                                <View style={styles.inputView}>
+                                    <Text>Preço: </Text>
+                                    <TextInput
+                                        placeholder="R$: "
+                                        keyboardType="numeric"
+                                        style={styles.input}
+                                        onChangeText={e => setItemEquipment({ ...novoItemEquipment, price: Number(e) })}
+                                        value={String(novoItemEquipment.price)} />
                                 </View>
-                                <FormularioInfos itemEquipment={novoItemEquipment} setItemEquipment={setItemEquipment} isArmorChecked={isArmorChecked} />
-                                <View style={styles.botoes}>
-                                    <Button title='Deletar' onPress={deletaItem} />
-                                    <Button title='Cancelar' onPress={cancelaItem} />
-                                    <Button title='Editar' onPress={editaItem} />
-                                </View>
-                            </ScrollView>
-                        </KeyboardAvoidingView>
-                    </Janela>
+                            </View>
+                            <FormularioInfos itemEquipment={novoItemEquipment} setItemEquipment={setItemEquipment} isArmorChecked={isArmorChecked} />
+                            <View style={styles.botoes}>
+                                <Button title='Deletar' onPress={deletaItem} />
+                                <Button title='Cancelar' onPress={cancelaItem} />
+                                <Button title='Editar' onPress={editaItem} />
+                            </View>
+                        </ScrollView>
+                    </KeyboardAvoidingView>
+                </Janela>
             </View>
-            
+
             <View style={styles.footerContainer}>
                 <View style={styles.footerContent}>
                     <TouchableOpacity style={styles.btnStart}>
@@ -174,6 +209,7 @@ export default function AtualizaProdutos() {
                     </TouchableOpacity>
                 </View>
             </View>
+            <Mensagem titulo="Error" content={"Todos os campos devem ser preenchidos!"} ligado={verificador} onPress={() => setVerificador(false)} error />
         </View>
     );
 }

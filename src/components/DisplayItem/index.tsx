@@ -10,8 +10,6 @@ const DisplayItem = ({itemImage, onPress = () => {}}: {itemImage: string, onPres
     const image: Object = itemImage == ''? 
     {uri: imagemAlternativa} : {uri: itemImage}
 
-    console.log(image)
-
     return(
         <Pressable style={styles.container} onPress={onPress}>
              <ImageBackground source={imageBackground} resizeMode="cover" style={styles.imageBackground}>

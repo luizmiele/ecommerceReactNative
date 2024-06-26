@@ -10,12 +10,14 @@ import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
 import * as FileSystem from 'expo-file-system';
 import { postItem } from "../../services/Api/api";
+import Mensagem from "../../components/Mensagem";
 
 export default function CriarProdutos() {
 
 
     const [isArmorChecked, setIsArmorChecked] = useState<boolean>(false);
     const [isMaterialChecked, setIsMaterialChecked] = useState<boolean>(false);
+    const [verificador, setVerificador] = useState<boolean>(false);
 
 
     const [novoItem, setItem] = useState<Item>({
@@ -61,7 +63,7 @@ export default function CriarProdutos() {
                     manipResult.uri,
                     { encoding: FileSystem.EncodingType.Base64 }
                 );
-                
+
                 setItemEquipment({ ...novoItemEquipment, img: `data:image/jpeg;base64,${String(base64)}` });
             }
         } catch (error) {
@@ -102,8 +104,27 @@ export default function CriarProdutos() {
         })
     }
 
+    const verificaInputVazio = (item: any, jsonVerificador: any) => {
+        for (let chave in item) {
+            if (item[chave] == jsonVerificador[chave]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     const salvaItem = () => {
         let formData = new FormData();
+        
+        const jsonVerificador: Item = {
+            img: '',
+            name: '',
+            description: '',
+            price: 0,
+            type: '',
+            status: 'ativo',
+        }
+
         if (isMaterialChecked) {
             const item: Item = {
                 img: novoItemEquipment.img,
@@ -111,14 +132,32 @@ export default function CriarProdutos() {
                 description: novoItemEquipment.description,
                 price: novoItemEquipment.price,
                 type: novoItemEquipment.type,
-                status: novoItemEquipment.status
+                status: 'ativo',
             }
-            formData = {...formData, ...item };
+
+            const verificaInputVazio = (item: any, jsonVerificador: any) => {
+                for (let chave in item) {
+                    if (item[chave] == jsonVerificador[chave]) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            if (verificaInputVazio(item, jsonVerificador)) {
+                setVerificador(verificaInputVazio(item, jsonVerificador))
+                return;
+            }
+
+            formData = { ...formData, ...item };
         } else if (isArmorChecked) {
+
+            if (verificaInputVazio(novoItemEquipment, jsonVerificador)) {
+                setVerificador(verificaInputVazio(novoItemEquipment, jsonVerificador))
+                return;
+            }
+
             formData = { ...formData, ...novoItemEquipment };
-        } else {
-            alert('Nenhuma opção selecionada');
-            return;
         }
 
         postItem(formData);
@@ -227,6 +266,7 @@ export default function CriarProdutos() {
                     </TouchableOpacity>
                 </View>
             </View>
+            <Mensagem titulo="Error" content={"Todos os campos devem ser preenchidos!"} ligado={verificador} onPress={() => setVerificador(false)} error />
         </View>
     );
 }

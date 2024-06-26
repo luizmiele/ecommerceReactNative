@@ -77,9 +77,7 @@ export default function FormularioHeader({
 
   useEffect(() => {
     fetchData();
-  }, []);
-
-  let contador: number = 0;
+  }, [itemEquipment.status]);
 
   useEffect(() => {
     if (itemEquipment.type === "Armor") {
