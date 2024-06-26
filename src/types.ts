@@ -10,19 +10,19 @@ export interface InputProps extends TextInputProps {
     style?: StyleProp<ViewStyle>;
 }
 
-export type itemFoundProps={
-    onPress?:()=>void,
+export type itemFoundProps = {
+    onPress?: () => void,
     titulo: string,
-    imagem:string,
-    description:string,
-    price:number,
-    type:string,
-    function1?:()=>void,
-    function2?:()=>void,
-    text1?:string,
-    text2?:string,
+    imagem: string,
+    description: string,
+    price: number,
+    type: string,
+    function1?: () => void,
+    function2?: () => void,
+    text1?: string,
+    text2?: string,
     status:string,
-    metadata:{
+    metadata: {
         durability: number,
         phy_defense: number,
         mag_defense: number,
@@ -36,7 +36,7 @@ export type itens = {
     price: number;
     type: string;
     status:string;
-    metadata:{
+    metadata: {
         durability: number,
         phy_defense: number,
         mag_defense: number,
@@ -56,7 +56,7 @@ export type messageProps = {
     titulo?: string | number | null;
     error?: boolean | null;
     content: string | number | null;
-    ligado?:boolean;
+    ligado?: boolean;
 }
 
 export interface IconProps extends TouchableOpacityProps {
@@ -98,11 +98,11 @@ export interface FooterProps extends TouchableOpacityProps {
 }
 
 export type Colaborador = {
-        nome:string,
-        email:string ,
-        linkedin:string ,
-        github:string ,
-        foto: ImageSourcePropType
+    nome: string,
+    email: string,
+    linkedin: string,
+    github: string,
+    foto: ImageSourcePropType
 }
 
 export type PropsChildren = {
@@ -127,7 +127,12 @@ export type AuthContext = {
 
 export type DrawerNavigation = {
     PortugolEcommerce: undefined;
-    LogOFF: any;
+    CriarProdutosScreen: undefined
+    VisualizarProdutosScreen: undefined;
+    AtualizarProdutosScreen: undefined;
+    LixeiraScreen: undefined;
+    CalculadoraScreen: undefined;
+    SobreNosScreen: undefined;
 };
 
 
@@ -145,4 +150,4 @@ export type PrivateStackNavigation = {
     SobreNos: undefined;
     PortugolStudio: undefined;
     Calculadora: undefined;
-  };
+};

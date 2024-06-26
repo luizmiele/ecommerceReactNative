@@ -2,7 +2,7 @@ import { Image, Pressable, Text, View } from "react-native"
 import { styles } from "./styles"
 import { propsJanela } from "../../types"
 import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { PrivateStackTypes } from "../../routes/privateStack";
 
 
@@ -15,7 +15,10 @@ function Janela(props: propsJanela) {
             <View style={styles.headerCardContainer}>
                 <View style={styles.headerCardContent}>
                     <Text style={styles.title}>{props.header}</Text>
-                    <Pressable onPress={()=>stack.pop()} onPressIn={() => setApertando(true)} onPressOut={() => setApertando(false)}>
+                    <Pressable onPress={() =>
+                            stack.canGoBack()
+                                ? stack.goBack()
+                                : stack.dispatch(DrawerActions.closeDrawer())} onPressIn={() => setApertando(true)} onPressOut={() => setApertando(false)}>
                         <Image source={apertando ? require("../../../assets/icons/botao-fechar-click.png") : require("../../../assets/icons/botao-fechar.png")} />
                     </Pressable>
                 </View>

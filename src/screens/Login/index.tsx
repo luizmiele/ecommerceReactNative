@@ -4,11 +4,13 @@ import { AuthCtx } from "../../contexts/AuthCtx";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
 import { styles } from "./styles";
+import Mensagem from "../../components/Mensagem";
 
 export default function Login() {
     const [openCard, setOpenCard] = useState<boolean>(false);
     const [email, setEmail] = useState<string>('');
     const [senha, setSenha] = useState<string>('');
+    const [error, setError] = useState<boolean>(false);
 
     const { login, loading } = useContext(AuthCtx);
 
@@ -18,7 +20,7 @@ export default function Login() {
             if (logado) {
                 //navigation.navigate("Workspace");
             } else {
-                Alert.alert("Falha no Login", "Email ou senha inválidos");
+                setError(true);
             }
         } catch (error) {
             Alert.alert("Erro de login", "Ocoreu um erro ao tentar efetuar login");
@@ -44,7 +46,6 @@ export default function Login() {
 
         return (
             <View style={styles.container}>
-
                 {openCard ? (<View style={styles.cardContainer}>
                     <View style={styles.headerCardContainer}>
                         <View style={styles.headerCardContent}>
@@ -87,6 +88,7 @@ export default function Login() {
                         </View>
                     </View>
                 )}
+                <Mensagem titulo="Error" content={"Email e/ou senha inválidos"} ligado={error} onPress={() => setError(false)} error />
             </View>
         );
     }
