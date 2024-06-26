@@ -11,7 +11,7 @@ import Icone from "../../components/Icone";
 export default function SobreNos() {
     return (
         <View style={styles.container}>
-            <Janela header="MSN Messenger" height={"90%"} width={"95%"} >
+            <Janela header="MSN Messenger" height={"auto"} width={"95%"} >
                 <View style={styles.content}>
                     <View style={styles.headerContent}>
                         <Text>File</Text>
@@ -77,29 +77,31 @@ export default function SobreNos() {
                             </View>
                         </View>
                     </View>
-                    <View style={styles.footerContent}>
-                        <Image
-                            style={styles.msnFotoFooter}
-                            source={require("../../../assets/MSN_messenger_user_156.png")}
-                        />
-                        <View style={styles.imgsFooter}>
+                    <View style={styles.footer}>
+                        <View style={styles.footerContent}>
                             <Image
-                                style={styles.msnMessenger}
-                                source={require("../../../assets/msn-messenger.png")}
+                                style={styles.msnFotoFooter}
+                                source={require("../../../assets/MSN_messenger_user_156.png")}
+                            />
+                            <View style={styles.imgsFooter}>
+                                <Image
+                                    style={styles.msnMessenger}
+                                    source={require("../../../assets/msn-messenger.png")}
+                                />
+                            </View>
+                            <Image
+                                style={styles.logoNetFooter}
+                                source={require("../../../assets/.net.png")}
+                                resizeMode="contain"
+                            />
+
+                            <LinearGradient
+                                colors={['#f6df0f', '#fc301e', '#0b8fed', '#33b136']}
+                                start={{ x: 0, y: 0 }}
+                                end={{ x: 1, y: 0 }}
+                                style={styles.gradientLineFooter}
                             />
                         </View>
-                        <Image
-                            style={styles.logoNetFooter}
-                            source={require("../../../assets/.net.png")}
-                            resizeMode="contain"
-                        />
-
-                        <LinearGradient
-                            colors={['#f6df0f', '#fc301e', '#0b8fed', '#33b136']}
-                            start={{ x: 0, y: 0 }}
-                            end={{ x: 1, y: 0 }}
-                            style={styles.gradientLineFooter}
-                        />
                     </View>
                 </View>
             </Janela>

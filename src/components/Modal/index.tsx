@@ -22,7 +22,7 @@ interface ModalProps {
 }
 
 export const Modal = ({ ...rest }: ModalProps) => {
-
+      
     return (
         <ModalContainer
             animationType="fade"

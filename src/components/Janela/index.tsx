@@ -3,11 +3,11 @@ import { styles } from "./styles"
 import { propsJanela } from "../../types"
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { StackTypes } from "../../routes/stack";
+import { PrivateStackTypes } from "../../routes/privateStack";
 
 
 function Janela(props: propsJanela) {
-    const stack = useNavigation<StackTypes>();
+    const stack = useNavigation<PrivateStackTypes>();
     const [apertando, setApertando] = useState(false)
 
     return (

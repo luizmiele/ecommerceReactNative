@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from "@react-navigation/native";
-import { StackTypes } from "../../routes/stack";
+import { PublicStackTypes } from "../../routes/publicStack";
 import { Splash } from '../Splash';
 
 export const SplashScreenWrapper = () => {
-    const navigation = useNavigation<StackTypes>();
+    const navigation = useNavigation<PublicStackTypes>();
     const [splashComplete, setSplashComplete] = useState(false);
 
     useEffect(() => {

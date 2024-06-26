@@ -8,7 +8,8 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     content: {
-        
+        height:'auto',
+        width: 'auto',        
     },
     headerContent: {
         flexDirection: "row",
@@ -17,6 +18,7 @@ export const styles = StyleSheet.create({
         gap: 10,
     },
     outerInfoContent: {
+        alignItems:'center',
         backgroundColor: "#0340b0",
         padding: 3,
         marginHorizontal: 5,
@@ -24,7 +26,7 @@ export const styles = StyleSheet.create({
     },
     infoContent: {
         backgroundColor: "#f1f1f1",      
-        width: 318,
+        width: '99.4%',
         height: 550,       
         borderColor: "#fff",
         borderWidth: 1,
@@ -78,6 +80,7 @@ export const styles = StyleSheet.create({
     emailContent: {
         flexDirection: "row",
         alignItems: "center",
+        margin:4,
         marginLeft: 10,
         gap: 10
     },
@@ -117,14 +120,16 @@ export const styles = StyleSheet.create({
         fontSize: 20,
         alignSelf: "center"
     },
-    footerContent: {
-        flexDirection: "column", 
-        justifyContent: "space-around",       
+    footer: {
+        justifyContent:'flex-end',      
         padding: 10
+    },
+    footerContent:{
+        top:'20%'
     },
     msnFotoFooter: {
         position: "absolute",
-        marginBottom: 5,
+        bottom:'15%',
         height: 87,
         width: 80,
         opacity: 0.2,
@@ -155,6 +160,5 @@ export const styles = StyleSheet.create({
         marginTop: 26,
         marginBottom: 5,
         alignSelf: "flex-end"
-       
     }
 });

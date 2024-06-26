@@ -27,13 +27,13 @@ export type itemFoundProps={
         mag_defense: number,
     }
 }
-export type itens={
-    id:number|string;
-    name:string;
-    description:string
-    img:string;
-    price:number
-    type:string
+export type itens = {
+    id: number | string;
+    name: string;
+    description: string
+    img: string;
+    price: number
+    type: string
     metadata:{
         durability: number,
         phy_defense: number,
@@ -49,10 +49,10 @@ export type propsJanela = {
     width?: DimensionValue | null;
 }
 
-export type messageProps={
-    onPress?:() => void;
-    titulo?:string | number | null
-    error?:boolean | null;
+export type messageProps = {
+    onPress?: () => void;
+    titulo?: string | number | null
+    error?: boolean | null;
     content: string | number | null;
     ligado?:boolean;
 }
@@ -67,13 +67,13 @@ export interface IconProps extends TouchableOpacityProps {
     onPress?: () => void;
 }
 
-export interface SearchBar{
+export interface SearchBar {
     style?: object;
     onPressLupa?: () => void;
     [key: string]: any;
 }
 
-export interface Item{
+export interface Item {
     img: string,
     name: string,
     description: string,
@@ -81,7 +81,7 @@ export interface Item{
     type: string,
 }
 
-export interface ItemEquipment extends Item{
+export interface ItemEquipment extends Item {
     metadata: {
         phy_defense: number,
         mag_defense: number,
@@ -95,10 +95,51 @@ export interface FooterProps extends TouchableOpacityProps {
 }
 
 export type Colaborador = {
-        
         nome:string,
         email:string ,
         linkedin:string ,
         github:string ,
         foto: ImageSourcePropType
 }
+
+export type PropsChildren = {
+    children: ReactNode;
+};
+
+export interface User {
+    email: string;
+    senha: string;
+}
+export interface Response {
+    user: User | null;
+}
+
+export type AuthContext = {
+    user: User | null;
+    login(email: string, senha: string): Promise<boolean>;
+    logout(): void;
+    signed: boolean;
+    loading: boolean;
+};
+
+export type DrawerNavigation = {
+    PortugolEcommerce: undefined;
+    LogOFF: any;
+};
+
+
+export type PublicStackNavigation = {
+    Splash: undefined;
+    Login: undefined;
+};
+
+export type PrivateStackNavigation = {
+    Workspace: undefined;
+    Lixeira: undefined;
+    CriarProdutos: undefined;
+    VisualizarProdutos: undefined;
+    AtualizarProdutos: undefined;
+    SobreNos: undefined;
+    PortugolStudio: undefined;
+    Calculadora: undefined;
+  };
