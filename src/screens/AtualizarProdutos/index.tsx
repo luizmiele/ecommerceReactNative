@@ -73,7 +73,14 @@ export default function AtualizaProdutos() {
         })
     }
 
-    const salvaItem = () => {
+    const deletaItem = () => {
+
+    }
+
+    const editaItem = () => {
+        
+        console.log('meu id:' + itemId);
+
         let formData = new FormData();
         if (isMaterialChecked) {
             const item: Item = {
@@ -83,21 +90,15 @@ export default function AtualizaProdutos() {
                 price: novoItemEquipment.price,
                 type: novoItemEquipment.type
             }
-            formData = { ...formData, ...item };
+            formData = {...formData, ...item };
         } else if (isArmorChecked) {
             formData = { ...formData, ...novoItemEquipment };
         } else {
             alert('Nenhuma opção selecionada');
             return;
         }
-    };
 
-    const deletaItem = () => {
-
-    }
-
-    const editaItem = () => {
-
+        editItem(itemId, formData);
     }
 
     return (
@@ -110,6 +111,7 @@ export default function AtualizaProdutos() {
                             <FormularioHeader
                                 itemEquipment={novoItemEquipment}
                                 setItemEquipment={setItemEquipment}
+                                setItemId={setItemId}
                                 handleArmorCheck={handleArmorCheck}
                                 handleMaterialCheck={handleMaterialCheck}
                                 cancelaItem={cancelaItem}

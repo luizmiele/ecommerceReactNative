@@ -13,20 +13,21 @@ export default function FormularioHeader({
     setItemEquipment,
     handleMaterialCheck,
     handleArmorCheck,
-    cancelaItem
+    cancelaItem,
+    setItemId
 }: {
     itemEquipment: ItemEquipment,
     setItemEquipment: any,
     handleMaterialCheck: () => void,
     handleArmorCheck: () => void,
-    cancelaItem: () => void
+    cancelaItem: () => void,
+    setItemId: React.Dispatch<React.SetStateAction<string>>
 }) {
 
     const [open, setOpen] = useState(false);
     const [data, setData] = useState<Object[]>([]);
     const [value, setValue] = useState(null);
     const [selecionaItem, setSelecionaItem] = useState(false);
-
 
 
     const pickImage = async () => {
@@ -83,6 +84,7 @@ export default function FormularioHeader({
     }, [selecionaItem, itemEquipment.type]);
 
     const escolheItem = (id: any) => {
+        setItemId(id);
         cancelaItem();
         getItemById(id).then(
             (item) => {
@@ -100,7 +102,9 @@ export default function FormularioHeader({
                 setOpen={setOpen}
                 setValue={setValue}
                 setItems={setData}
-                onSelectItem={(item) => escolheItem(item.value)}
+                onSelectItem={(item) => {
+                    escolheItem(item.value)
+                }}
                 style={styles.dropDown}
             />
             <DisplayItem itemImage={itemEquipment.img} onPress={pickImage} />
