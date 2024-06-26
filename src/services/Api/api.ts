@@ -86,7 +86,8 @@ export async function postItem(formData: FormData): Promise<FormData | null> {
 
 export async function editItem(id: string, formData: FormData): Promise<FormData | null> {
     try {
-      const response = await api.put(`/items/${id}`, formData);
+
+      const response = await api.put(`/itens/${id}`, formData);
 
       if (response.status === 200) {
         Alert.alert("Item editado com sucesso!")
