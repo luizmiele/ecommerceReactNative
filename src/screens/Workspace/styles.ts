@@ -9,12 +9,14 @@ export const styles = StyleSheet.create({
     content: {
         top: "2%",
         height: "86%",
-        justifyContent: "space-evenly"
+        width: "50%",
+        flexWrap: "wrap",
     },
     icon: {
         width: 100,
         height: 100,
         alignItems: "center",
         justifyContent: "space-evenly",
+        resizeMode: "contain"
     },
 });

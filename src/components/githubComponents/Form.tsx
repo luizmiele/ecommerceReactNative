@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
-import SigninButton from "../components/SigninButton";
+import SigninButton from "../../components/githubComponents/SigninButton";
     
 const Form: React.FC = () => {
     return (

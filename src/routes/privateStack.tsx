@@ -7,6 +7,14 @@ import AtualizarProdutos from "../screens/AtualizarProdutos";
 import SobreNos from "../screens/SobreNos";
 import PortugolStudio from "../screens/PortugolStudio";
 import Calculadora from "../screens/Calculadora";
+import Tinder from "../screens/Tinder"
+import PlayStore from "../screens/PlayStore/Aplicativos"
+import Games from "../screens/PlayStore/Games"
+import GitHubLogin from "../screens/GitHub/GitHubLogin";
+import GitHubSignIn from "../screens/GitHub/GitHubSignIn";
+import MercadoLivre from "../screens/ML"
+import Behance from "../screens/Behance";
+import Alura from "../screens/Alura";
 import { PrivateStackNavigation } from "../types";
 
 
@@ -48,6 +56,38 @@ const RotasPrivadas = () => {
       <Screen
         name="Calculadora"
         component={Calculadora}
+      />
+      <Screen
+        name="Tinder"
+        component={Tinder}
+      />
+      <Screen
+        name="PlayStore"
+        component={PlayStore}
+      />
+      <Screen
+        name="Games"
+        component={Games}
+      />
+      <Screen
+        name="GitHubLogin"
+        component={GitHubLogin}
+      />
+      <Screen
+        name="GitHubSignIn"
+        component={GitHubSignIn}
+      />
+      <Screen
+        name="MercadoLivre"
+        component={MercadoLivre}
+      />
+      <Screen
+        name="Behance"
+        component={Behance}
+      />
+      <Screen
+        name="Alura"
+        component={Alura}
       />
     </Navigator>
   );

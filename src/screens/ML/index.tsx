@@ -10,7 +10,7 @@ import { cardList } from "../../data/cardList";
 import SemanaGamer from "../../components/MLComponents/SemanaGamer";
 
 
-export default function App() {
+export default function MercadoLivre() {
   return (
     <View style={styles.container}>
       <Header />

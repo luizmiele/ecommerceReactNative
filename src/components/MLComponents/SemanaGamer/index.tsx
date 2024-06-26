@@ -10,7 +10,7 @@ export default function SemanaGamer() {
             <View style={styles.imageView}>
                 <Image
                     style={styles.image}
-                    source={require('../../../assets/images/semana-gamer.png')}
+                    source={require('../../../../assets/imgMercadoLivre/semana-gamer.png')}
                 />
             </View>
         </LinearGradient>

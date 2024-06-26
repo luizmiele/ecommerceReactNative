@@ -7,35 +7,35 @@ export default function Servicos() {
             <View style={styles.ofertasContent}>
                 <View style={styles.imageTextContainer}>
                     <Image
-                        source={require("../../../assets/images/mercado-livre.png")}
+                        source={require("../../../../assets/imgMercadoLivre/mercado-livre.png")}
                         style={styles.imageLinkContent}
                     />
                     <Text style={styles.textLinkContent}>Ofertas</Text>
                 </View>
                 <View style={styles.imageTextContainer}>
                     <Image
-                        source={require("../../../assets/images/mercado-play.png")}
+                        source={require("../../../../assets/imgMercadoLivre/mercado-play.png")}
                         style={styles.imageLinkContent}
                     />
                     <Text style={styles.textLinkContent}>Mercado Play</Text>
                 </View>
                 <View style={styles.imageTextContainer}>
                     <Image
-                        source={require("../../../assets/images/mercado-pago.png")}
+                        source={require("../../../../assets/imgMercadoLivre/mercado-pago.png")}
                         style={styles.imageLinkContent}
                     />
                     <Text style={styles.textLinkContent}>Mercado Pago</Text>
                 </View>
                 <View style={styles.imageTextContainer}>
                     <Image
-                        source={require("../../../assets/images/ticket.png")}
+                        source={require("../../../../assets/imgMercadoLivre/ticket.png")}
                         style={styles.imageLinkContent}
                     />
                     <Text style={styles.textLinkContent}>Cupons</Text>
                 </View>
                 <View style={styles.imageTextContainer}>
                     <Image
-                        source={require("../../../assets/images/cesta.png")}
+                        source={require("../../../../assets/imgMercadoLivre/cesta.png")}
                         style={styles.imageLinkContent}
                     />
                     <Text style={styles.textLinkContent}>Supermercado</Text>

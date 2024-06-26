@@ -1,8 +1,8 @@
 
 import { Image, StatusBar, StyleSheet, Text, View } from 'react-native';
-import perfilFoto from '../../../assets/icon-behance.png'
-import Engrenagem from '../../../assets/big-gear.png'
-import Dots from '../../../assets/dots.png'
+const perfilFoto =  require( '../../../../assets/imgBehance/icon-behance.png');
+const Engrenagem = require ('../../../../assets/imgBehance/big-gear.png');
+const Dots = require ('../../../../assets/imgBehance/dots.png');
 import SimpleButton from '../SimpleButton';
 import SelectButton from '../SelectButton';
 

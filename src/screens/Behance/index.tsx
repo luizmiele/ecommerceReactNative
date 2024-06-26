@@ -6,7 +6,7 @@ import BarraScroll from "../../components/BehanceComponents/BarraScroll";
 import BigBlueButton from "../../components/BehanceComponents/BigBlueButton";
 import MeuFooter from "../../components/BehanceComponents/MeuFooter";
 
-export default function App() {
+export default function Behance() {
   return (
     <View style={styles.geral}>
       <TopView />

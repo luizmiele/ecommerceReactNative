@@ -12,7 +12,7 @@ import Foundation from "react-native-vector-icons/Foundation"
 import EvilIcons from "react-native-vector-icons/EvilIcons"
 import MaterialIcons from "react-native-vector-icons/MaterialIcons"
 
-const Home = () => {
+const Tinder = () => {
   return (
     <View style={styles.container}>
       <View style={styles.topo}>
@@ -23,7 +23,7 @@ const Home = () => {
         <Btn02 />
       </View>
       <View style={styles.principal}>
-        <ImageBackground source={require('../../assets/boeck.gif')} style={styles.foto} >
+        <ImageBackground source={require('../../../assets/imgTinder/boeck.gif')} style={styles.foto} >
         <LinearGradient colors={['rgba(0,0,0,0.8)', 'rgba(0,0,0,0)']} style={styles.gradient}
             start={{ x: 0.5, y: 1 }} end={{ x: 0.5, y: 0 }} />
             <View style={styles.metade01}>
@@ -81,7 +81,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Tinder;
 
 const styles = StyleSheet.create({
   container: {

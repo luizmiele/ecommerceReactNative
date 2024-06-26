@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text, Image, ScrollView } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import SigninButton from "../../components/githubComponents/SigninButton";
-import Form from "../../components/githubComponents/Form";
+import SigninButton from "../../../components/githubComponents/SigninButton";
+import Form from "../../../components/githubComponents/Form";
 
-const Signin: React.FC = () => {
+const GitHubSignin = () => {
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -38,7 +38,7 @@ const Signin: React.FC = () => {
           </View>
         </View>
         <Image
-          source={require("../assets/naotankei.png")}
+          source={require("../../../../assets/imgGitHub/nao-tankei.png")}
           style={styles.naotankei}
         />
       </View>
@@ -100,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Signin;
+export default GitHubSignin;

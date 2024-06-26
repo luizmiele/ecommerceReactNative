@@ -150,11 +150,19 @@ export type PrivateStackNavigation = {
     SobreNos: undefined;
     PortugolStudio: undefined;
     Calculadora: undefined;
+    Tinder: undefined;
+    PlayStore: undefined;
+    Games: undefined;
+    GitHubLogin: undefined;
+    GitHubSignIn: undefined;
+    MercadoLivre: undefined;
+    Behance: undefined;
+    Alura: undefined;
 };
 
 export type App = {
-    id: number, 
-    name: string, 
-    image: string, 
+    id: number,
+    name: string,
+    image: string,
     rating: number
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, Linking } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Button from "../../components/githubComponents/Button";
+import Button from "../../../components/githubComponents/Button";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 
@@ -22,7 +22,8 @@ const openExternalLink = (url: string) => {
   Linking.openURL(url).catch(err => console.error("Pagina não pode ser carregada.", err));
 };
 
-const Login: React.FC<Props> = ({ navigation }) => {
+// Componente sem usar React.FC
+export default function GitHubLogin({ navigation }: any) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upContainer}>
@@ -33,7 +34,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
           title="ENTRAR COM GITHUB"
           textColor="#FFFFFF"
           backgroundColor="#000000"
-          onPress={() => navigation.navigate("Signin")} 
+          onPress={() => navigation.navigate("GitHubSignIn")}
         />
         <View style={styles.midTextContainer}>
           <Text style={styles.midText}>
@@ -61,7 +62,7 @@ const Login: React.FC<Props> = ({ navigation }) => {
       </View>
     </SafeAreaView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -110,9 +111,4 @@ const styles = StyleSheet.create({
   problemasContainer: {
     marginTop: 30,
   },
-  buttons: {
-    width: "90%",
-  },
 });
-
-export default Login;

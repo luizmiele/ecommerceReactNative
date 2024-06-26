@@ -5,7 +5,7 @@ export default function Propaganda() {
     return (
         <View style={styles.propagandaContainer}>
             <Image
-                source={require("../../../assets/images/propaganda.png")}
+                source={require("../../../../assets/imgMercadoLivre/propaganda.png")}
                 style={styles.propagandaContent}
             />
         </View>

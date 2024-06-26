@@ -1,8 +1,8 @@
 import { View, StyleSheet, Text, FlatList, ScrollView} from "react-native";
-import { aplicativos, aplicativosRecomendados } from "../../data/aplicativos";
-import Botao from "../../components/PlayStoreComponents/Botao"
-import Card from "../../components/PlayStoreComponents/Card";
-import Header from "../../components/PlayStoreComponents/Header";
+import { aplicativos, aplicativosRecomendados } from "../../../data/aplicativos";
+import Botao from "../../../components/PlayStoreComponents/Botao"
+import Card from "../../../components/PlayStoreComponents/Card";
+import Header from "../../../components/PlayStoreComponents/Header";
 
 const data: string[] = ['mais usados', 'categorias', 'recomendados', 'streaming', 'novidades']
 

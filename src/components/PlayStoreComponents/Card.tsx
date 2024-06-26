@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, Image, StyleSheet, View } from 'react-native';
-import { App } from '../types/app';
+import { App } from '../../types';
 
 const Card = ({ app }: { app: App }) => {
     return (
@@ -10,12 +10,12 @@ const Card = ({ app }: { app: App }) => {
 
                 <View style={styles.topInformation}>
                     <Text style={styles.name}>{app.name}</Text>
-                    <Image source={require('../assets/optionsIcon.png')} style={styles.options} />
+                    <Image source={require('../../../assets/imgPlayStore/optionsIcon.png')} style={styles.options} />
                 </View>
 
                 <View style={styles.bottomInformation}>
                     <Text style={styles.rating}>{app.rating}</Text>
-                    <Image source={require('../assets/starIcon.png')} style={styles.star} />
+                    <Image source={require('../../../assets/imgPlayStore/starIcon.png')} style={styles.star} />
                 </View>
             </View>
         </Pressable>

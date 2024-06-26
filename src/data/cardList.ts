@@ -1,6 +1,6 @@
 const localizacaoImage = require("../../assets/imgMercadoLivre/localizacao.png");
 const moedaImage = require("../../assets/imgMercadoLivre/moeda.png");
-const compraGarantidaImage = require("../../assets/imgMercadoLivre/garantia.png");
+const compraGarantidaImage = require("../..//assets/imgMercadoLivre/compra-garantida.png");
 const lojaOficialImage = require("../../assets/imgMercadoLivre/lojas-oficiais.png");
 const categoriasImage = require("../../assets/imgMercadoLivre/categorias.png");
 

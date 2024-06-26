@@ -1,12 +1,12 @@
 import { View, StyleSheet, Text, FlatList, ScrollView} from "react-native";
-import { games, gamesRecomendados } from "../../data/games";
-import Botao from "../../components/PlayStoreComponents/Botao";
-import Card from "../../components/PlayStoreComponents/Card";
-import Header from "../../components/PlayStoreComponents/Header";
+import { games, gamesRecomendados } from "../../../data/games";
+import Botao from "../../../components/PlayStoreComponents/Botao";
+import Card from "../../../components/PlayStoreComponents/Card";
+import Header from "../../../components/PlayStoreComponents/Header";
 
 const data: string[] = ['populares', 'categorias', 'recomendados', 'familia', 'novidades']
 
-const Body = () => {
+const Games = () => {
 
     return (
         <View style={styles.main}>
@@ -51,7 +51,7 @@ const Body = () => {
         </View>);
 }
 
-export default Body
+export default Games
 
 const styles = StyleSheet.create({
     main: {

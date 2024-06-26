@@ -11,7 +11,7 @@ type Categoria = {
 const categorias: Categoria[] = [
     {
         nome: 'APLICATIVOS',
-        endereco: 'Aplicativos'
+        endereco: 'PlayStore'
     },
     {
         nome: 'GAMES',
