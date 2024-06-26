@@ -8,7 +8,6 @@ const api = axios.create({
 
 export async function postItem(formData: FormData): Promise<FormData | null> {
   try {
-    console.log(formData);
     const endpoint = "/itens";
     const response = await api.post(endpoint, formData, {
       headers: {

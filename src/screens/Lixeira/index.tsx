@@ -31,12 +31,20 @@ export default function VisualizarProdutos() {
     getAll();
   }, [])
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 3000);
+  }, [loading])
+
   const deleta = (id: string | number) => {
     deleteById(id);
+    getAll()
   }
 
   const restaura = (id: string | number) => {
     restaurarItem(id);
+    getAll();
   }
 
   return (
