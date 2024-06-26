@@ -3,13 +3,23 @@ import { styles } from "./styles";
 import { useState } from "react";
 import { itemFoundProps } from "../../types";
 import { Modal } from "../../components/Modal";
+import { StackTypes } from "../../routes/stack";
+import { useNavigation } from "@react-navigation/native";
 
-export default function ItemFound({...rest }: itemFoundProps) {
+
+
+export default function ItemFound({ ...rest }: itemFoundProps) {
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
   }
+
+  const navigation = useNavigation<StackTypes>();
+
+  function handlesignIn() {
+      navigation.navigate("AtualizarProdutos");
+  };
   
   return (
     <TouchableOpacity onPress={toggleModal}>
@@ -24,7 +34,7 @@ export default function ItemFound({...rest }: itemFoundProps) {
           <Text>{rest.titulo}</Text>
         </View>
       </View>
-      <Modal description={rest.description} imagem={rest.imagem} titulo={rest.titulo} price={rest.price} type={rest.type} metadata={rest.metadata} isModalVisible={isModalVisible} onClose={toggleModal} />
+      <Modal description={rest.description} imagem={rest.imagem} titulo={rest.titulo} price={rest.price} type={rest.type} metadata={rest.metadata} isModalVisible={isModalVisible} onClose={toggleModal} button1={rest.text1 ||'Cancelar'} button2={rest.text2 || 'Editar'} function1={rest.function1 ||toggleModal} function2={rest.function2 || handlesignIn}/>
     </TouchableOpacity>
 
   );
