@@ -24,6 +24,7 @@ export default function CriarProdutos() {
         description: '',
         price: 0,
         type: '',
+        status: "ativo",
     });
 
     const [novoItemEquipment, setItemEquipment] = useState<ItemEquipment>({
@@ -32,6 +33,7 @@ export default function CriarProdutos() {
         description: '',
         price: 0,
         type: '',
+        status: "ativo",
         metadata: {
             phy_defense: 0,
             mag_defense: 0,
@@ -92,6 +94,7 @@ export default function CriarProdutos() {
             description: '',
             price: 0,
             type: '',
+            status: "ativo",
             metadata: {
                 phy_defense: 0,
                 mag_defense: 0,
@@ -108,7 +111,8 @@ export default function CriarProdutos() {
                 name: novoItemEquipment.name,
                 description: novoItemEquipment.description,
                 price: novoItemEquipment.price,
-                type: novoItemEquipment.type
+                type: novoItemEquipment.type,
+                status: novoItemEquipment.status
             }
             formData = {...formData, ...item };
         } else if (isArmorChecked) {

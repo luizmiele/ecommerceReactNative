@@ -21,6 +21,7 @@ export type itemFoundProps={
     function2?:()=>void,
     text1?:string,
     text2?:string,
+    status:string,
     metadata:{
         durability: number,
         phy_defense: number,
@@ -30,10 +31,11 @@ export type itemFoundProps={
 export type itens = {
     id: number | string;
     name: string;
-    description: string
+    description: string;
     img: string;
-    price: number
-    type: string
+    price: number;
+    type: string;
+    status:string;
     metadata:{
         durability: number,
         phy_defense: number,
@@ -51,7 +53,7 @@ export type propsJanela = {
 
 export type messageProps = {
     onPress?: () => void;
-    titulo?: string | number | null
+    titulo?: string | number | null;
     error?: boolean | null;
     content: string | number | null;
     ligado?:boolean;
@@ -79,6 +81,7 @@ export interface Item {
     description: string,
     price: number,
     type: string,
+    status: string
 }
 
 export interface ItemEquipment extends Item {

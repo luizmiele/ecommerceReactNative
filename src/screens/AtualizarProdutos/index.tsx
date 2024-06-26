@@ -5,7 +5,7 @@ import Checkbox from "../../components/Checkbox";
 import Button from "../../components/Button";
 import { Item, ItemEquipment } from "../../types";
 import { useEffect, useState } from "react";
-import { editItem } from "../../services/Api/api";
+import { editItem, deleteLogico } from "../../services/Api/api";
 import FormularioHeader from "../../components/FormularioHeader";
 import FormularioInputs from "../../components/FormularioInputs";
 import FormularioInfos from "../../components/FormularioInfos";
@@ -23,6 +23,7 @@ export default function AtualizaProdutos() {
         description: '',
         price: 0,
         type: '',
+        status: 'ativo',
     });
 
     const [novoItemEquipment, setItemEquipment] = useState<ItemEquipment>({
@@ -31,6 +32,7 @@ export default function AtualizaProdutos() {
         description: '',
         price: 0,
         type: '',
+        status: 'ativo',
         metadata: {
             phy_defense: 0,
             mag_defense: 0,
@@ -65,6 +67,7 @@ export default function AtualizaProdutos() {
             description: '',
             price: 0,
             type: '',
+            status: '',
             metadata: {
                 phy_defense: 0,
                 mag_defense: 0,
@@ -74,7 +77,7 @@ export default function AtualizaProdutos() {
     }
 
     const deletaItem = () => {
-
+        deleteLogico(itemId)
     }
 
     const editaItem = () => {
@@ -88,7 +91,8 @@ export default function AtualizaProdutos() {
                 name: novoItemEquipment.name,
                 description: novoItemEquipment.description,
                 price: novoItemEquipment.price,
-                type: novoItemEquipment.type
+                type: novoItemEquipment.type,
+                status: 'ativo',
             }
             formData = {...formData, ...item };
         } else if (isArmorChecked) {

@@ -2,10 +2,11 @@ import { Text, View, Image, FlatList } from "react-native";
 import Janela from "../../components/Janela";
 import ItemFound from "../../components/ItemFound/index";
 import { useEffect, useState } from "react";
-import { getAllItens } from "../../services/Api/api";
+import { getAllItens, deleteById, restaurarItem } from "../../services/Api/api";
 import { itens } from "../../types";
 import SearchBar from "../../components/SearchBar";
 import { styles } from "./styles"; 
+
 
 export default function VisualizarProdutos() {
 
@@ -24,18 +25,18 @@ export default function VisualizarProdutos() {
     }
     setTimeout(() => {
       setLoading(false)
-    }, 5000);
+    }, 3000);
   }
   useEffect(() => {
     getAll();
   }, [])
 
-  const deletaItem = () => {
-
+  const deleta = (id: string | number) => {
+    deleteById(id);
   }
 
-  const restauraItem = () => {
-    
+  const restaura = (id: string | number) => {
+    restaurarItem(id);
   }
 
   return (
@@ -43,7 +44,7 @@ export default function VisualizarProdutos() {
       <Janela header="Lixeira" height={"90%"} width={"90%"}>
         <View style={styles.todos}>
           <View>
-            <Text style={{ textAlign: 'center' }}>EXCLUIDOS: </Text>
+            <Text style={{ textAlign: 'center' }}>EXCLUIDOS</Text>
           </View>
         </View>
         <View style={styles.geral}>
@@ -52,17 +53,16 @@ export default function VisualizarProdutos() {
             (loading ? <View style={{ marginTop: 20, height: '100%' }}><Image style={{ height: 250, width: 250, resizeMode: 'contain' }} source={require('../../../assets/icons/tshell32_170.gif')} /></View> : <FlatList numColumns={(2)}
               data={lista}
               renderItem={({ item }) => <ItemFound 
-              description={item.description} 
-              price={item.price} 
-              type={item.type} 
-              titulo={item.name} 
-              imagem={item.img}
-              metadata={item.metadata}  
-              function1={deletaItem} 
-              function2={restauraItem} 
-              text1="Excluir"
-              text2="Restaurar"
-              />}
+                description={item.description}
+                price={item.price}
+                type={item.type}
+                titulo={item.name}
+                imagem={item.img}
+                metadata={item.metadata}
+                function1={() => {deleta(item.id)}}
+                function2={() => {restaura(item.id)}}
+                text1="Excluir"
+                text2="Restaurar" status={""}              />}
               keyExtractor={item => item.id.toString()}
             />)
           }
