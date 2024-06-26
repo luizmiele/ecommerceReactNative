@@ -181,7 +181,7 @@ export default function CriarProdutos() {
         setTimeout(() => {
             setSaving(false);
             postItem(formData);
-        }, 4000);
+        }, 3510);
     };
 
     return (
