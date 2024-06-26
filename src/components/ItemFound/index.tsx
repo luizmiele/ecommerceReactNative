@@ -3,7 +3,7 @@ import { styles } from "./styles";
 import { useState } from "react";
 import { itemFoundProps } from "../../types";
 import { Modal } from "../../components/Modal";
-import { StackTypes } from "../../routes/stack";
+import { PrivateStackTypes } from "../../routes/privateStack";
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -15,7 +15,7 @@ export default function ItemFound({ ...rest }: itemFoundProps) {
     setModalVisible(!isModalVisible)
   }
 
-  const navigation = useNavigation<StackTypes>();
+  const navigation = useNavigation<PrivateStackTypes>();
 
   function handlesignIn() {
       navigation.navigate("AtualizarProdutos");
