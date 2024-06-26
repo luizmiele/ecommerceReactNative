@@ -10,13 +10,17 @@ export interface InputProps extends TextInputProps {
     style?: StyleProp<ViewStyle>;
 }
 
-export type itemFoundProps = {
-    onPress?: () => void;
-    titulo: string;
-    imagem: string;
-    description: string;
-    price: number,
-    type: string,
+export type itemFoundProps={
+    onPress?:()=>void,
+    titulo: string,
+    imagem:string,
+    description:string,
+    price:number,
+    type:string,
+    function1?:()=>void,
+    function2?:()=>void,
+    text1?:string,
+    text2?:string,
     metadata:{
         durability: number,
         phy_defense: number,

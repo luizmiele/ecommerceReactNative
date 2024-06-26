@@ -1,12 +1,6 @@
 import { Modal as ModalContainer, View, Image, Text } from "react-native";
-import { PrivateStackTypes } from "../../routes/privateStack";
-import { useNavigation } from "@react-navigation/native";
-import { CheckBox } from "react-native-elements";
-import { useState } from "react";
 import { styles } from "./styles"
-import Input from "../Input";
 import Button from "../Button";
-import Checkbox from "../Checkbox";
 
 interface ModalProps {
     isModalVisible: boolean;
@@ -15,22 +9,20 @@ interface ModalProps {
     description: string;
     price: number,
     type: string,
+    button1: string,
+    button2: string,
     metadata: {
         durability: number,
         phy_defense: number,
         mag_defense: number,
     }
-    onClose: () => void;
+    onClose?: () => void,
+    function1?: () => void,
+    function2?: () => void
 }
 
 export const Modal = ({ ...rest }: ModalProps) => {
-
-    const navigation = useNavigation<PrivateStackTypes>();
-
-    function handlesignIn() {
-        navigation.navigate("AtualizarProdutos");
-    };
-
+      
     return (
         <ModalContainer
             animationType="fade"
@@ -87,8 +79,8 @@ export const Modal = ({ ...rest }: ModalProps) => {
                             </View>
                         </View>
                         <View style={styles.buttonsContainer}>
-                            <Button title="Cancelar" onPress={rest.onClose} />
-                            <Button title="Editar" onPress={handlesignIn} />
+                            <Button title={rest.button1} onPress={rest.function1} />
+                            <Button title={rest.button2} onPress={rest.function1} />
                         </View>
                     </View>
                 </View>
