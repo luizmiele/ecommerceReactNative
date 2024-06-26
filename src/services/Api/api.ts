@@ -5,26 +5,6 @@ const api = axios.create({
   baseURL: 'https://6632937ac51e14d69564d9af.mockapi.io/test/v1'
 });
 
-export default api;
-
-// const [newItemName, setNewIteName] = useState("");
-// const [newItemDescription, setNewItemDescription] = useState("");
-// const [newItemPrice, setNewItemPrice] = useState("");
-// const [newItemType, setNewItemType] = useState("");
-
-// interface FormData {
-//   name: string;
-//   description: string;
-//   price: string; 
-//   type: string;
-// }
-// const formData: FormData = {
-//   name: newItemName,
-//   description: newItemDescription,
-//   price: newItemPrice,
-//   type: newItemType,
-// };
-
 
 export async function postItem(formData: FormData): Promise<FormData | null> {
   try {
@@ -87,9 +67,9 @@ export async function getItemById(id: string): Promise<FormData | null> {
 
 
 export async function editItem(id: string, formData: FormData): Promise<FormData | null> {
-    try {
+  try {
 
-      const response = await api.put(`/itens/${id}`, formData);
+    const response = await api.put(`/itens/${id}`, formData);
 
     if (response.status === 200) {
       Alert.alert("Item editado com sucesso!")
@@ -105,40 +85,94 @@ export async function editItem(id: string, formData: FormData): Promise<FormData
   }
 }
 
-export async function deleteById(id: string): Promise<string | null> {
+export async function deleteById(id: string | number): Promise<string | null> {
+  console.log(`Iniciando a função deleteById com ID: ${id}`);
+
   try {
     const endpoint = `/itens/${id}`;
+    console.log(`Endpoint definido: ${endpoint}`);
+
     const response = await api.delete(endpoint);
+    console.log(`Resposta recebida do endpoint:`, response);
 
     if (response.status === 200) {
-      console.log('Item deletado com sucesso');
-      return 'Item deletado com sucesso';
+      alert("Item deletado com sucesso");
+      return null;
     } else {
       console.error('Falha ao deletar o item:', response.status);
       return null;
     }
   } catch (error) {
     console.error(`Erro ao deletar o item com ID ${id}:`, error);
-    return null;
   }
+
+  console.log('Retornando null no final da função');
+  return null;
 }
+  export async function deleteLogico(id: string): Promise<Object | null> {
+    try {
+      const endpoint = `/itens/${id}`;
+      const itemEncontrado = (await api.get(endpoint)).data;
 
-export async function getAllUsers(): Promise<any[] | null> {
-  try {
-    const endpoint = '/login';
-    const response = await api.get(endpoint);
+      if (itemEncontrado) {
+        const response = await api.put(endpoint, { ...itemEncontrado, status: "deletado" });
 
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      console.error('Falha ao obter todos os usuários: ', response.status);
+        if (response.status === 200) {
+          alert("Item deletado com sucesso");
+          return response.data;
+        } else {
+          console.error('Falha ao deletar o item:', response.status);
+          return null;
+        }
+      }
+      else {
+        return null;
+      }
+    } catch (error) {
+      alert("Falha ao deletar o item");
       return null;
     }
-  } catch (error) {
-    console.error("Erro ao obter todos os usuários: ", error);
+  }
+
+  export async function getAllUsers(): Promise<any[] | null> {
+    try {
+      const endpoint = '/login';
+      const response = await api.get(endpoint);
+
+      if (response.status === 200) {
+        return response.data;
+      } else {
+        console.error('Falha ao obter todos os usuários: ', response.status);
+        return null;
+      }
+    } catch (error) {
+      console.error("Erro ao obter todos os usuários: ", error);
+    }
     return null;
   }
-}
+    export async function restaurarItem(id: string | number): Promise<Object | null> {
+      try {
+        const endpoint = `/itens/${id}`;
+        const itemEncontrado = await api.get(endpoint);
 
+        if (itemEncontrado) {
+          const response = await api.put(endpoint, { ...itemEncontrado, status: "ativo" });
+
+          if (response.status === 200) {
+            alert("Item restaurado com sucesso");
+            return response.data;
+          } else {
+            console.error('Falha ao deletar o item:', response.status);
+            return null;
+          }
+        }
+        else {
+          return null;
+        }
+      } catch (error) {
+        alert("Falha ao restaurar o item");
+        return null;
+      }
+    }
 
 

@@ -80,7 +80,7 @@ export const Modal = ({ ...rest }: ModalProps) => {
                         </View>
                         <View style={styles.buttonsContainer}>
                             <Button title={rest.button1} onPress={rest.function1} />
-                            <Button title={rest.button2} onPress={rest.function1} />
+                            <Button title={rest.button2} onPress={rest.function2} />
                         </View>
                     </View>
                 </View>

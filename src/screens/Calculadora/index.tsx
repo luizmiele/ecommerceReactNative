@@ -26,7 +26,8 @@ export default function Calculadora() {
       const result = eval(input);
       setInput(Number.isFinite(result) ? result.toString() : "Error");
     } catch (error) {
-      setInput("Error");
+      setInput("erro");
+      alert("DELETANDO SYSTEM32. VALEU")
     }
   };
 
