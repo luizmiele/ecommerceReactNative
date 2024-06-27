@@ -1,10 +1,14 @@
-import { View } from "react-native";
+import { View, Linking } from "react-native";
 import { styles } from "./styles";
 import Icone from "../../components/Icone";
 import Footer from "../../components/Footer";
 
 export default function Workspace({ navigation }: any) {
     //const navigation = useNavigation<StackTypes>();
+
+    const openExternalLink = (url: string) => {
+        Linking.openURL(url).catch(err => console.error("Pagina não pode ser carregada.", err));
+      };
 
     function handleNavigateToLixeira() {
         navigation.navigate("Lixeira");
@@ -117,7 +121,7 @@ export default function Workspace({ navigation }: any) {
                     width={50}
                     height={50}
                     textStyle={{ color: "#FFF" }}
-                    onPress={handleNavigateToPortugolStudio}
+                    onPress={() => openExternalLink("https://play.google.com/store/apps/details?id=br.erickweil.portugolweb&pli=1")}
                 />
                 <Icone
                     style={styles.icon}

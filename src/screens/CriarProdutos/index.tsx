@@ -86,7 +86,7 @@ export default function CriarProdutos() {
         setIsArmorChecked(!isArmorChecked);
         if (!isArmorChecked) {
             setIsMaterialChecked(false);
-            setItemEquipment({ ...novoItemEquipment, type: 'armadura' });
+            setItemEquipment({ ...novoItemEquipment, type: 'Armor' });
         }
     };
 
@@ -94,7 +94,7 @@ export default function CriarProdutos() {
         setIsMaterialChecked(!isMaterialChecked);
         if (!isMaterialChecked) {
             setIsArmorChecked(false);
-            setItemEquipment({ ...novoItemEquipment, type: 'material' });
+            setItemEquipment({ ...novoItemEquipment, type: 'Material' });
         }
     };
 
@@ -181,6 +181,7 @@ export default function CriarProdutos() {
         setTimeout(() => {
             setSaving(false);
             postItem(formData);
+            cancelaItem();
         }, 3510);
     };
 

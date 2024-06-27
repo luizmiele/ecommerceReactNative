@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         
     },
     titleAlura: {
-        height:38.5,
+        height: '85%',
         color: "#fff",
         fontSize: 50,
     },
