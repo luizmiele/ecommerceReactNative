@@ -27,6 +27,7 @@ export default function VisualizarProdutos() {
       setLoading(false)
     }, 3000);
   }
+
   useEffect(() => {
     getAll();
   }, [])
@@ -39,11 +40,13 @@ export default function VisualizarProdutos() {
 
   const deleta = (id: string | number) => {
     deleteById(id);
-    getAll()
+    setLista([]); 
+    getAll();
   }
 
   const restaura = (id: string | number) => {
     restaurarItem(id);
+    setLista([]); 
     getAll();
   }
 
